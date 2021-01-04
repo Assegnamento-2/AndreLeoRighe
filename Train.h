@@ -14,31 +14,10 @@ public:
     virtual void getPosition() = 0;
     virtual void setName(int n) = 0;
 	virtual void setStart(int s) = 0;
-	virtual void print() { cout << 1; }
-	void getTime();
-    int speed;
+	virtual void print() = 0;
+	virtual void getTime() = 0;
+	int speed;
     int name;
     int start_time;
 };
-class B: public Train
-{
-    virtual void setSpeed(int current_speed) {}
-    virtual void setSpeedLimit(int s) {}
-    virtual void getPosition() {}
-    virtual void setName(int name) {}
-	virtual void setStart(int s) {}
-	virtual void print() { cout << 2; }
-	void getTime(){}
-};
 
-int main()
-{
-	B i;
-	Train& t = i;
-	t.print();
-}
-// class Station
-// {
-// public:
-//     virtual void
-// }
