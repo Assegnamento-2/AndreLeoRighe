@@ -9,9 +9,11 @@ using namespace std;
 class Train
 {
 public:
-    virtual void setSpeed(int current_speed) = 0;
-    virtual void setSpeedLimit() = 0;
+	Train(vector<int>);
+	virtual void setSpeed(int current_speed) = 0;
+	virtual void setSpeedLimit() = 0;
     virtual void getPosition() = 0;
+    void getTime();
     int speed;
 };
 // class Station
