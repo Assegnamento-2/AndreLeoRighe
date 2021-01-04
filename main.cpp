@@ -15,10 +15,10 @@ int main(){
 //secondo numero = stazione di partenza (0=origine / 1=capolinea)
 //terzo numero = tipo di treno (1=regionale)
 //quarto -> ... orari
-if (data[3] == 1)
+if (data[2] == 1)
 	Regional r = new Regional(data);
-if (data[3] == 2)
+if (data[2] == 2)
 	HighSpeed hs = new HighSpeed(data);
-if (data[3] == 3)
+if (data[2] == 3)
 	SuperHighSpeed shs = new SuperHighSpeed(data);
 }
