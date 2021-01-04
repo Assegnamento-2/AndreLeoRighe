@@ -11,18 +11,9 @@ public:
     void setSpeedLimit()
     {
         speed = 80;
+        getTime();
     }
     void getPosition()
     {
     }
 };
-int main(){
-	ifstream input("timetables.txt");
-	int i;
-	vector<int> data;
-	while (input)
-	{
-		input >> i;
-		data.push_back(i);
-	}
-}
