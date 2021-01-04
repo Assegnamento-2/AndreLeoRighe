@@ -9,7 +9,7 @@ public:
     void setSpeedLimit()    {   speed = 80; }
     void getPosition(){}
 	void setName(int n) { name = n;   };
-	void setStart(int s) { start_time = s;   };
+	void setStart(int s) { start_time =  s;   };
 
 	Regional(vector<int> vect){
         setName(vect[0]);
