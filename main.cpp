@@ -1,8 +1,25 @@
 #include "Regional.cpp"
 
 
-int main()
-{
-    Regional r;
-	r.setSpeed(1000);
+int main(){
+	ifstream input("timetables.txt");
+	int i;
+	vector<int> data;
+	while (input>>i)
+	{
+		data.push_back(i);
+	}
+    //for(int num : data)
+    //    cout<<num<<endl;
+
+//primo numero = nome treno
+//secondo numero = stazione di partenza (0=origine / 1=capolinea)
+//terzo numero = tipo di treno (1=regionale)
+//quarto -> ... orari
+if (data[3] == 1)
+	Regional r = new Regional(data);
+if (data[3] == 2)
+	HighSpeed hs = new HighSpeed(data);
+if (data[3] == 3)
+	SuperHighSpeed shs = new SuperHighSpeed(data);
 }
