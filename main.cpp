@@ -22,3 +22,13 @@ if (data[2] == 2)
 if (data[2] == 3)
 	SuperHighSpeed shs = new SuperHighSpeed(data);
 }
+
+void checkTimes(vector<int> times){
+
+	for(int i = 4, i++, i<number_ of_stations+4)
+		if (time[i]<min_time)
+				time[i]=min_time+10;
+}
+
+
+int min_time = 10/80 + (/*distanza tra stazioni-10 / velocità treno*/);
