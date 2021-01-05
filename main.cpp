@@ -2,14 +2,12 @@
 
 int main()
 {
-    int number_of_trains = 0;                   //serve?
     ifstream input;
     input.open("timetables.txt");
     while (!input.eof())
     {
         string s;
         getline(input, s);
-        number_of_trains++;
     }
     input.close();
     input.open("timetables.txt");
@@ -32,13 +30,11 @@ int main()
     }
     input.close();
 
-    int number_of_stations = 0;
     input.open("line_description.txt");
     while (!input.eof())
     {
         string s;
         getline(input, s);
-        number_of_stations++;
     }
     input.close();
     input.open("line_description.txt");
@@ -67,7 +63,7 @@ int main()
     //         cout << k << ' ';
     //     }
     // }
-    for(int i = 0; i<number_of_stations; i++){
+    for(int i = 0; i<all_stations.size(); i++){
         for (auto k : all_stations[i])
             cout<<k<<" ";
         cout<<endl;
@@ -94,13 +90,13 @@ int main()
 
    
 };
- void checkTimes(vector<int> times)
-    {
-        if (times[2] == 1)
-            checkTimesRegional(times);
-        if (times[2] == 2)
-            checkTimesHSpeed(times);
-        if (times[2] == 3)
-            checkTimesSHSpeed(times);
+//  void checkTimes(vector<int> times)
+//     {
+//         if (times[2] == 1)
+//             checkTimesRegional(times);
+//         if (times[2] == 2)
+//             checkTimesHSpeed(times);
+//         if (times[2] == 3)
+//             checkTimesSHSpeed(times);
 
-    }
+//     }

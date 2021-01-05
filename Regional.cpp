@@ -18,7 +18,8 @@ public:
         //setTimes?
     }
     void checkTimesRegional(vector<int> orari){
-        for (int i = 3; i<number_of_stations+3;i++)         //come ci accedo??
+        //for (int i = 3; i<number_of_stations+3;i++)         //(come ci accedo??) a number of stations? l'ho eliminato perché efffettivamente basta guardare la dimensione dell'array di vettori
+
             
     }
 };
