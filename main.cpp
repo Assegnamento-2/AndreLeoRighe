@@ -103,5 +103,4 @@ int main()
         if (times[2] == 3)
             checkTimesSHSpeed(times);
 
-    //delete[] all_train;
     }
