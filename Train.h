@@ -16,7 +16,7 @@ public:
     virtual void setName(int n) = 0;
 	virtual void setStart(int s) = 0;
 	//virtual void getTime() = 0;
-	int speed;
+	int speed; //potrebbero andare in private?
     int name;
     int start_time;
 	virtual ~Train();
