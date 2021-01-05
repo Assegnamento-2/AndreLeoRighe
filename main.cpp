@@ -67,6 +67,11 @@ int main()
     //         cout << k << ' ';
     //     }
     // }
+    for(int i = 0; i<number_of_stations; i++){
+        for (auto k : all_stations[i])
+            cout<<k<<" ";
+        cout<<endl;
+    }
 
     input.close();
 
