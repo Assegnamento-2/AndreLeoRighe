@@ -2,12 +2,14 @@
 
 int main()
 {
+    int number_of_trains = 0;                   //serve?
     ifstream input;
     input.open("timetables.txt");
     while (!input.eof())
     {
         string s;
         getline(input, s);
+        number_of_trains++;
     }
     input.close();
     input.open("timetables.txt");
