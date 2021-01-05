@@ -14,7 +14,7 @@ int main()
     input.close();
     input.open("timetables.txt");
 
-    vector<vector<int>> all_trains[number_of_trains];
+    vector<vector<int>> all_trains;
 
     while (input)
     {
@@ -28,7 +28,7 @@ int main()
         {
             arr.push_back(num);
         }
-        all_trains->push_back(arr); //associo ad un elemento dell'array di TRENI il vettore del singolo treno
+        all_trains.push_back(arr); //associo ad un elemento dell'array di TRENI il vettore del singolo treno
     }
     input.close();
 
@@ -43,7 +43,7 @@ int main()
     input.close();
     input.open("line_description.txt");
 
-    vector<vector<string>> all_stations[number_of_stations];
+    vector<vector<string>> all_stations;
 
     while (input)
     {
@@ -57,7 +57,7 @@ int main()
         {
             arr.push_back(num);
         }
-        all_stations->push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
+        all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
     }
 
     // for (int i = 0; i < number_of_stations; i++)                                     PROVA DI STAMPA NON VA
