@@ -89,13 +89,19 @@ int main()
     // if (data[2] == 3)
     // 	SuperHighSpeed shs = new SuperHighSpeed(data);
 
-    //void checkTimes(vector<int> times)
-    //{
-    //    int min_time = 10 / 80 + (/*distanza tra stazioni-10 / velocità treno*/);
-    //    for (int i = 4; i < (number_of_stations + 4); i++)
-    //        if (times[i] < min_time)
-    //            times[i] = min_time + 10;
+    for(auto elem : all_trains)
+        checkTimes(elem);
 
-    //    //delete[] all_train;
-    //}
+   
 };
+ void checkTimes(vector<int> times)
+    {
+        if (times[2] == 1)
+            checkTimesRegional(times);
+        if (times[2] == 2)
+            checkTimesHSpeed(times);
+        if (times[2] == 3)
+            checkTimesSHSpeed(times);
+
+    //delete[] all_train;
+    }

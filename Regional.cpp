@@ -17,5 +17,8 @@ public:
         setSpeed(160);
         //setTimes?
     }
-
+    void checkTimesRegional(vector<int> orari){
+        for (int i = 3; i<number_of_stations+3;i++)         //come ci accedo??
+            
+    }
 };
