@@ -97,5 +97,5 @@ int main()
     //            times[i] = min_time + 10;
 
     //    //delete[] all_train;
-    //}
+    //}rrrt
 };
