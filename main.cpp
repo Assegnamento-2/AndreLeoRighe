@@ -2,7 +2,7 @@
 
 int main()
 {
-    int number_of_trains = 0;
+    int number_of_trains = 0;                   //serve?
     ifstream input;
     input.open("timetables.txt");
     while (!input.eof())
@@ -14,7 +14,7 @@ int main()
     input.close();
     input.open("timetables.txt");
 
-    vector<vector<int>> all_trains;
+    vector<vector<int>> all_trains;     //vettore di vettori -> ogni vettore = un treno
 
     while (input)
     {
@@ -28,7 +28,7 @@ int main()
         {
             arr.push_back(num);
         }
-        all_trains.push_back(arr); //associo ad un elemento dell'array di TRENI il vettore del singolo treno
+        all_trains.push_back(arr); 
     }
     input.close();
 
@@ -43,7 +43,7 @@ int main()
     input.close();
     input.open("line_description.txt");
 
-    vector<vector<string>> all_stations;
+    vector<vector<string>> all_stations;    //vettore di vettori -> ogni vettore = una stazione
 
     while (input)
     {
@@ -60,7 +60,7 @@ int main()
         all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
     }
 
-    // for (int i = 0; i < number_of_stations; i++)                                     PROVA DI STAMPA NON VA
+    // for (int i = 0; i < number_of_stations; i++)                         PROVA DI STAMPA NON VA
     // {
     //     for (auto k = all_trains[i].begin(); k != all_stations[i].end(); k++)
     //     {
