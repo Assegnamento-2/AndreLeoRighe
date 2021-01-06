@@ -4,13 +4,6 @@ int main()
 {
     ifstream input;
     input.open("timetables.txt");
-    while (!input.eof())
-    {
-        string s;
-        getline(input, s);
-    }
-    input.close();
-    input.open("timetables.txt");
 
     vector<vector<int>> all_trains; //vettore di vettori -> ogni vettore = un treno
 
@@ -30,13 +23,7 @@ int main()
     }
     input.close();
 
-    input.open("line_description.txt");
-    while (!input.eof())
-    {
-        string s;
-        getline(input, s);
-    }
-    input.close();
+
     input.open("line_description.txt");
 
     vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
