@@ -5,12 +5,18 @@ using namespace std;
 class Train : public Railway
 {
 public:
-
-	virtual void setSpeed(int current_speed) = 0;
+	Train(int index);
+	virtual void setSpeed(double speed) = 0;
 	virtual void setSpeedLimit() = 0;
-    virtual void getPosition() = 0;
-    virtual void setName(int n) = 0;
-	virtual void setStart(int s) = 0;
-	//virtual void getTime() = 0;
+	virtual double getPosition() = 0;
+	virtual void updatePosition() = 0;
+
+	const int name;
+	const int start_station;
+	const int start_time;
+	const int type;
+	double current_pos;
+	double current_speed;
+	double max_speed;
 	virtual ~Train();
 };
