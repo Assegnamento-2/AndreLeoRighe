@@ -1,7 +1,5 @@
 #include "Railway.h"
 
-using namespace std;
-
 class Train : public Railway
 {
 public:
