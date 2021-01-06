@@ -1,11 +1,15 @@
 #include "Railway.h"
 
-Railway::Railway() {}
+Railway::Railway() 
+{
+getTimetable();
+getLineDescription();
+}
 
-void Railway::getTimetable(string file_name)
+void Railway::getTimetable()
 {
     ifstream input;
-    input.open(file_name);
+    input.open("timetables.txt");
 
     while (input)
     {
@@ -22,11 +26,22 @@ void Railway::getTimetable(string file_name)
         all_trains.push_back(arr);
     }
     input.close();
+    for (int i = 0; i < all_trains.size() - 1; i++) //perché size è 1 in più????
+    {
+        if (all_trains[i][1] != 1) //controlla la stazione di partenza sia accettabile, altrimenti assegna la stazione di origine
+        {
+            all_trains[i][1] = 0;
+        }
+        if (all_trains[i][2] != 1 || all_trains[i][2] != 0) //controlla che il tipo di treno sia accettabile, altrimenti gli assegna il ruolo di treno superveloce
+        {
+            all_trains[i][2] = 2;
+        }
+    }
 }
-void Railway::getLineDescription(string file_name)
+void Railway::getLineDescription()
 {
     ifstream input;
-    input.open(file_name);
+    input.open("line_description.txt");
     bool is_first = true;
     while (input)
     {
@@ -49,16 +64,15 @@ void Railway::getLineDescription(string file_name)
         all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
     }
     input.close();
-     for (int i = 1; i < all_stations.size()-1; i++) //perché size è 1 in più????
+    for (int i = 1; i < all_stations.size() - 1; i++) //perché size è 1 in più????
     {
-       if (stoi(all_stations[i][1]) != 1) //controlla che il tipo di stazione sia accettabile, altrimenti le assegna il ruolo di stazione principale
-       {
-            all_stations[i][1] = "0";
-            cout<<i;
-        }
-        if ((stoi(all_stations[i][2])-stoi(all_stations[i-1][2]))<20) //cerca ed elimina opportunamente eventuali stazioni distanti meno di 20km fra loro
+        if (stoi(all_stations[i][1]) != 1) //controlla che il tipo di stazione sia accettabile, altrimenti le assegna il ruolo di stazione principale
         {
-            all_stations.erase(all_stations.begin()+i);
+            all_stations[i][1] = "0";
+        }
+        if ((stoi(all_stations[i][2]) - stoi(all_stations[i - 1][2])) < 20) //cerca ed elimina opportunamente eventuali stazioni distanti meno di 20km fra loro
+        {
+            all_stations.erase(all_stations.begin() + i);
         }
     }
 };

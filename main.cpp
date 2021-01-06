@@ -3,10 +3,11 @@
 int main()
 {
     Railway prova1;
-    prova1.getLineDescription("line_description.txt");
-    for (int i = 0; i < prova1.all_stations.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
+    //prova1.getLineDescription();
+    cout<<prova1.all_stations.size();
+    for (int i = 0; i < prova1.all_trains.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
     {
-        for (auto k : prova1.all_stations[i])
+        for (auto k : prova1.all_trains[i])
             cout << k << "/";
         cout << endl;
     }
