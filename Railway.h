@@ -5,9 +5,13 @@
 #include <fstream>
 #include <sstream>
 
+using namespace std;
 
 class Railway
 {
     public:
-    void getTimetable();
+		Railway();
+		void getTimetable(string file_name);
+		void getLineDescription(string file_name);
+
 };

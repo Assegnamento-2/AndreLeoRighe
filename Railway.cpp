@@ -1,9 +1,11 @@
 #include "Railway.h"
 
-int main()
+Railway::Railway(){}
+
+void Railway::getTimetable(string file_name)
 {
     ifstream input;
-    input.open("timetables.txt");
+    input.open(file_name);
 
     vector<vector<int>> all_trains; //vettore di vettori -> ogni vettore = un treno
 
@@ -22,9 +24,11 @@ int main()
         all_trains.push_back(arr);
     }
     input.close();
-
-
-    input.open("line_description.txt");
+}
+void Railway::getLineDescription(string file_name)
+{
+    ifstream input;
+    input.open(file_name);
 
     vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
 
@@ -36,17 +40,15 @@ int main()
         stringstream row;
         row.str(input_line);
         string num;
-        while (row >> num)
+        while (row >> num) //DA FARE: SE IL NOME STAZIONE È COMPOSTO DA PIÙ PAROLE VA MESSO NELLA STESSA CELLA DEL VETTORE
         {
             arr.push_back(num);
         }
         all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
     }
     input.close();
-
-    Regional firstone(all_trains[0]);
-
-
+};
+    //Regional firstone(all_trains[0]);
 
     // for (int i = 0; i < all_trains.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
     // {
@@ -54,7 +56,6 @@ int main()
     //         cout << k << " ";
     //     cout << endl;
     // }
-
 
     //for(int num : data)
     //    cout<<num<<endl;
@@ -72,7 +73,6 @@ int main()
 
     // for(auto elem : all_trains)
     //     checkTimes(elem);
-};
 //  void checkTimes(vector<int> times)
 //     {
 //         if (times[2] == 1)
