@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 
+
 using namespace std;
 
 class Railway
@@ -16,4 +17,5 @@ public:
 	int leoleo;
 	void getTimetable();
 	void getLineDescription();
+	void checkTimetables();
 };

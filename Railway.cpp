@@ -1,9 +1,15 @@
 #include "Railway.h"
 
-Railway::Railway() 
+Railway::Railway()
 {
-getTimetable();
-getLineDescription();
+    getTimetable();
+    getLineDescription();
+    //vector<Train> trenivect;
+    // for (int i = 0; i < all_trains.size() - 1; i++)
+    // {
+    //     Train uno(i);
+    //     trenivect.pushback(uno);
+    // }
 }
 
 void Railway::getTimetable()
@@ -55,7 +61,7 @@ void Railway::getLineDescription()
         {
             arr.push_back(num);
         }
-        if (is_first)
+        if (is_first) //nel caso della prima stazione aggiunge tipologia e distanza
         {
             arr.push_back("0");
             arr.push_back("0");
@@ -76,7 +82,9 @@ void Railway::getLineDescription()
         }
     }
 };
-//Regional firstone(all_trains[0]);
+void Railway::checkTimetables()
+{
+}
 
 //for(int num : data)
 //    cout<<num<<endl;
