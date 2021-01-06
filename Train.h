@@ -1,9 +1,19 @@
-#include "Railway.h"
+// #include "Railway.h"
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <string>
+#include <fstream>
+#include <sstream>
 
-class Train : public Railway
+
+using namespace std;
+
+class Train //: public Railway
 {
 public:
-	Train(int index);
+	Train();
+	Train(vector<int> &vect);
 	virtual void setSpeed(double speed) = 0;
 	virtual void setSpeedLimit() = 0;
 	virtual double getPosition() = 0;
@@ -16,5 +26,10 @@ public:
 	double current_pos;
 	double current_speed;
 	double max_speed;
-	virtual ~Train();
+	// 	virtual ~Train();
+};
+class Regional : public Train
+{
+public:
+	Regional();
 };

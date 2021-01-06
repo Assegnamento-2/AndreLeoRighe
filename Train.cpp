@@ -1,16 +1,18 @@
 #include "Train.h"
 
-Train::Train(int index) //costruttore di Train: riceve come parametro un int corrispondente alla riga nel timetables del treno da creare
-	: name{all_trains[index][0]}, start_station{all_trains[index][1]}, type{all_trains[index][2]}, start_time{all_trains[index][3]}
+Train::Train(vector<int>& vect) //costruttore di Train: riceve come parametro un int corrispondente alla riga nel timetables del treno da creare
+	: name{vect[0]}, start_station{vect[1]}, type{vect[2]}, start_time{vect[3]}
 {
 	//setta la velocità massima in km/min
 	if (type == 1)
-		max_speed = 160 / 60;
+		Regional reg();
 	if (type == 2)
 		max_speed = 240 / 60;
 	if (type == 3)
 		max_speed = 300 / 60;
 }
+Train::Train() 
+: name{-1}, start_station{-1}, type{-1}, start_time{-1}{}
 Train::~Train() {}
 void Train::setSpeed(double speed) //setta la velocità richiesta, se superiore al limite setta come velocità la velocità massima
 {

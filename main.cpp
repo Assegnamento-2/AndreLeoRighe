@@ -1,9 +1,10 @@
-#include "Railway.cpp"
+#include "Railway.h"
 
 int main()
 {
     Railway prova1;
-    Train uno(2);
+    vector<int> trenouno=prova1.all_trains[1];
+    //Train uno(trenouno);
     cout<<prova1.all_trains.size();
     for (int i = 0; i < prova1.all_trains.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
     {
