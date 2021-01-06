@@ -9,9 +9,11 @@ using namespace std;
 
 class Railway
 {
-    public:
-		Railway();
-		void getTimetable(string file_name);
-		void getLineDescription(string file_name);
+public:
+	Railway();
+	vector<vector<int>> all_trains;		 //vettore di vettori -> ogni vettore = un treno
+	vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
 
+	void getTimetable(string file_name);
+	void getLineDescription(string file_name);
 };

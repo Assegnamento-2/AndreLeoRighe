@@ -1,13 +1,11 @@
 #include "Railway.h"
 
-Railway::Railway(){}
+Railway::Railway() {}
 
 void Railway::getTimetable(string file_name)
 {
     ifstream input;
     input.open(file_name);
-
-    vector<vector<int>> all_trains; //vettore di vettori -> ogni vettore = un treno
 
     while (input)
     {
@@ -30,8 +28,6 @@ void Railway::getLineDescription(string file_name)
     ifstream input;
     input.open(file_name);
 
-    vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
-
     while (input)
     {
         vector<string> arr;
@@ -48,31 +44,31 @@ void Railway::getLineDescription(string file_name)
     }
     input.close();
 };
-    //Regional firstone(all_trains[0]);
+//Regional firstone(all_trains[0]);
 
-    // for (int i = 0; i < all_trains.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
-    // {
-    //     for (auto k : all_trains[i])
-    //         cout << k << " ";
-    //     cout << endl;
-    // }
+// for (int i = 0; i < all_trains.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
+// {
+//     for (auto k : all_trains[i])
+//         cout << k << " ";
+//     cout << endl;
+// }
 
-    //for(int num : data)
-    //    cout<<num<<endl;
+//for(int num : data)
+//    cout<<num<<endl;
 
-    //primo numero = nome treno
-    //secondo numero = stazione di partenza (0=origine / 1=capolinea)
-    //terzo numero = tipo di treno (1=regionale)
-    //quarto -> ... orari
-    //if (data[2] == 1)
-    //    Regional r = new Regional(data);
-    // if (data[2] == 2)
-    // 	HighSpeed hs = new HighSpeed(data);
-    // if (data[2] == 3)
-    // 	SuperHighSpeed shs = new SuperHighSpeed(data);
+//primo numero = nome treno
+//secondo numero = stazione di partenza (0=origine / 1=capolinea)
+//terzo numero = tipo di treno (1=regionale)
+//quarto -> ... orari
+//if (data[2] == 1)
+//    Regional r = new Regional(data);
+// if (data[2] == 2)
+// 	HighSpeed hs = new HighSpeed(data);
+// if (data[2] == 3)
+// 	SuperHighSpeed shs = new SuperHighSpeed(data);
 
-    // for(auto elem : all_trains)
-    //     checkTimes(elem);
+// for(auto elem : all_trains)
+//     checkTimes(elem);
 //  void checkTimes(vector<int> times)
 //     {
 //         if (times[2] == 1)
