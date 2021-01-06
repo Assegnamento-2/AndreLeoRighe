@@ -1,8 +1,8 @@
-Venezia-SL
+Venezia SL
 Mestre 1 15
 Mirano 1 30
 Dolo 1 60
-Vigonza-Pianiga 0 80
+Vigonza Pianiga 0 80
 Busa 1 90
 Padova 0 120
 Ronchi 1 200
