@@ -1,19 +1,15 @@
-#include "Train.h"
 
-class HishSpeed: public Train
+#include "Train.cpp"
+
+class HighSpeed : public Train
 {
 public:
-	virtual void setSpeed(int current_speed) 
+	HighSpeed()
 	{
-		speed = current_speed;
+		std::cout << " HighSpeed.cpp constructor ";
 	}
-	virtual void setSpeedLimit() {}
-    virtual void getPosition() {}
-    virtual void setName(int n) {}
-	virtual void setStart(int s) {}
-	//virtual void getTime() = 0;
-	int speed;
-    int name;
-    int start_time;
+	void Print()
+	{
+		cout << "\nHIH";
+	}
 };
-
