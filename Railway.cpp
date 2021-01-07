@@ -4,12 +4,13 @@ Railway::Railway()
 {
     getTimetable();
     getLineDescription();
-    //vector<Train> trenivect;
-    // for (int i = 0; i < all_trains.size() - 1; i++)
-    // {
-    //     Train uno(i);
-    //     trenivect.pushback(uno);
-    // }
+    vector<Train> trenivect;
+    for (int i = 0; i < all_trains.size() - 1; i++)
+    {
+        vector<int> vect=all_trains[i];
+        Train treno_uno(vect);
+        trenivect.push_back(treno_uno);
+    }
 }
 
 void Railway::getTimetable()
