@@ -8,8 +8,8 @@ Railway::Railway()
     for (int i = 0; i < all_trains.size() - 1; i++)
     {
         vector<int> vect=all_trains[i];
-        Train uno(vect);
-        trenivect.pushback(uno);
+        Train treno_uno;
+        trenivect.push_back(treno_uno);
     }
 }
 

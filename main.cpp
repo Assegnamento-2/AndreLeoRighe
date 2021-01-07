@@ -4,7 +4,8 @@ int main()
 {
     Railway prova1;
     vector<int> trenouno=prova1.all_trains[1];
-    //Train uno(trenouno);
+    Train uno;
+    //Regional p;
     cout<<prova1.all_trains.size();
     for (int i = 0; i < prova1.all_trains.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
     {

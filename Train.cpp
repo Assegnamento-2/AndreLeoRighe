@@ -5,14 +5,15 @@ Train::Train(vector<int>& vect) //costruttore di Train: riceve come parametro un
 {
 	//setta la velocità massima in km/min
 	if (type == 1)
-		Regional reg();
+		//Regional reg(); 
+		max_speed = 160 / 60;
 	if (type == 2)
 		max_speed = 240 / 60;
 	if (type == 3)
 		max_speed = 300 / 60;
 }
-Train::Train() 
-: name{-1}, start_station{-1}, type{-1}, start_time{-1}{}
+// Train::Train() 
+// : name{-1}, start_station{-1}, type{-1}, start_time{-1}{}
 Train::~Train() {}
 void Train::setSpeed(double speed) //setta la velocità richiesta, se superiore al limite setta come velocità la velocità massima
 {
