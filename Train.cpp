@@ -1,17 +1,17 @@
 #ifndef TRAIN1
 #define TRAIN1
-#include "T.h"
+#include "Train.h"
 
-class Train:public T{
-public:
-Train()
+// class Train:public T{
+// public:
+Train::Train()
 {
 	std::cout << "Train.cpp constructor" << std::endl;
 }
-void Print()
+void Train::Print()
 {
 	cout << "\nTRAIN";
 }
-};
+// };
 
 #endif
