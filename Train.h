@@ -1,14 +1,14 @@
 #ifndef TRAI
 #define TRAI
-#include "Train.h"
+#include "T.h"
 
-// class Train : public T
-// {
-// public:
+class Train : public T
+{
+public:
 	Train();
     // {
 	// 	std::cout<<" Train.h constructor ";
 	// };
     void Print();
-// };
+};
 #endif
