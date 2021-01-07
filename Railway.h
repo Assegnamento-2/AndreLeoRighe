@@ -7,10 +7,10 @@
 
 
 // using namespace std;
-#ifndef RAILWAY
-#define RAILWAY
-#include "Train.h"
- class Train;
+// #ifndef RAILWAY
+// #define RAILWAY
+#include "Regional.cpp"
+ //class Train;
 class Railway
 {
 public:
@@ -21,4 +21,4 @@ public:
 	void getLineDescription();
 	void checkTimetables();
 };
-#endif
+// #endif
