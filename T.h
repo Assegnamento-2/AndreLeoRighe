@@ -13,13 +13,6 @@ using namespace std;
 class T 
 {
 public:
-	int variable;
-	T();
-	// T(vector<int> &vect);
-	// virtual void setSpeed(double speed) = 0;
-	// virtual void setSpeedLimit() = 0;
-	// virtual double getPosition() = 0;
-	// virtual void updatePosition() = 0;
-	// virtual ~T();
+	
 };
 #endif

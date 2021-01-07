@@ -1,7 +1,7 @@
-#include "Railway.h"
+#include "Regional.cpp"
 
 int main()
 {
-    Regional lll;
+    Train* lll = new Regional();
     return 0;
 }
