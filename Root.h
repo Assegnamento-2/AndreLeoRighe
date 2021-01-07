@@ -20,6 +20,7 @@ public:
 	// virtual double getPosition() = 0;
 	// virtual void updatePosition() = 0;
 	//virtual ~T();
+	int numero;
 };
 
 //class Regional : public Train

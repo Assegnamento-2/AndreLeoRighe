@@ -1,16 +1,6 @@
-// #include <iostream>
-// #include <vector>
-// #include <cmath>
-// #include <string>
-// #include <fstream>
-// #include <sstream>
-
-
-// using namespace std;
-// #ifndef RAILWAY
-// #define RAILWAY
 #include "Regional.cpp"
- //class Train;
+#include "HighSpeed.cpp"
+#include "SuperSpeed.cpp"
 class Railway
 {
 public:
@@ -21,4 +11,3 @@ public:
 	void getLineDescription();
 	void checkTimetables();
 };
-// #endif

@@ -7,8 +7,13 @@ Railway::Railway()
     vector<Train> trenivect;
     for (int i = 0; i < all_trains.size() - 1; i++)
     {
-        vector<int> vect=all_trains[i];
-        Train treno_uno(vect);
+        vector<int> vect = all_trains[i];
+        if (vect[2] == 1)
+            Regional treno(vect);
+        if (vect[2] == 2)
+            HighSpeed treno(vect);
+        if (vect[2] == 3)
+            SuperSpeed treno(vect);
         trenivect.push_back(treno_uno);
     }
 }

@@ -4,7 +4,7 @@
 class Train : public Root
 {
 public:
-    Train();
+    //Train();
     Train(vector<int> &vect);
     void setSpeed(double speed);
     void setSpeedLimit();
