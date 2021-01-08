@@ -7,7 +7,6 @@ public:
     Train(vector<int> &vect);
     void setSpeed(double speed);
     void setSpeedLimit();
-    double getPosition();
     void updatePosition();
     const int name;
     const int start_station;

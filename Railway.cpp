@@ -38,9 +38,18 @@ Railway::Railway()
             station_vect.push_back(stazione);
         }
     }
-    checkTimetables();
+    //checkTimetables();
 }
-
+bool Railway::compareStations(vector<string> &uno, vector<string> &due) //serve per ordinare le stazioni quando viene letto il line_description
+{
+    return stoi(uno[2]) < stoi(due[2]);
+}
+ bool Railway::compareTrains(vector<int> &uno, vector<int> &due) //serve per ordinare i treni quando viene letto il timetable
+{
+    if (uno[3] == due[3]) //a parità di orario, il treno più veloce parte prima
+        return uno[2] > due[2];
+    return uno[3] < due[3];
+}
 void Railway::getTimetable()
 {
     ifstream input;
@@ -81,11 +90,12 @@ void Railway::getTimetable()
         {
             all_trains[i][2] = 3;
         }
-        if (all_trains[i][3] < 0)
+        if (all_trains[i][3] < 0) //controlla che l'orario di partenza sia accettabile, altrimenti lo setta a 0
         {
             all_trains[i][3] = 0;
         }
     }
+    sort(all_trains.begin(), all_trains.end(), compareTrains); //ordina i treni NON VA PERCHÈ?????
 }
 void Railway::getLineDescription()
 {
@@ -114,7 +124,7 @@ void Railway::getLineDescription()
         }
         if (arr.size() != 3)
             continue;
-        all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
+        all_stations.push_back(arr); //associo ad un elemento del vettore di STAZIONI il vettore del singolo treno
     }
     input.close();
     for (int i = 1; i < all_stations.size(); i++)
@@ -123,6 +133,8 @@ void Railway::getLineDescription()
         {
             all_stations[i][1] = "0";
         }
+        sort(all_stations.begin(), all_stations.end(), compareStations); //ordina le stazioni
+
         if ((stoi(all_stations[i][2]) - stoi(all_stations[i - 1][2])) < 20) //cerca ed elimina opportunamente eventuali stazioni distanti meno di 20km fra loro
         {
             all_stations.erase(all_stations.begin() + i);
