@@ -1,3 +1,6 @@
+#ifndef HIGHSPEEDC
+#define HIGHSPEEDC
+
 #include "Train.cpp"
 class HighSpeed : public Train
 {
@@ -8,3 +11,5 @@ public:
 		max_speed = (double)240 / 60;
 	}
 };
+
+#endif

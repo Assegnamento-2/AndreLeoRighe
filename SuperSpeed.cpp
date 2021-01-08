@@ -1,3 +1,5 @@
+#ifndef SUPER
+#define SUPER
 #include "Train.cpp"
 class SuperSpeed : public Train
 {
@@ -8,3 +10,4 @@ public:
 		max_speed = (double) 300 / 60;
 	}
 };
+#endif

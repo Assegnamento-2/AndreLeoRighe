@@ -8,9 +8,6 @@ Train::Train(vector<int> &vect) //costruttore di Train: riceve come parametro un
 	if (start_station == 0)
 		current_pos = 0;
 }
-// Train::Train()		NON CREDO SERVA
-// 	: name{-1}, start_station{-1}, type{-1}, start_time{-1} { std::cout << "default constructor\n"; }
-//~Train() {}
 void Train::setSpeed(double speed) //setta la velocità richiesta, se superiore al limite setta come velocità la velocità massima
 {
 	speed = (double)speed / 60;

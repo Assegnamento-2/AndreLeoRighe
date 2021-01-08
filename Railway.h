@@ -1,16 +1,15 @@
-#include "Regional.cpp"
-#include "HighSpeed.cpp"
-#include "SuperSpeed.cpp"
+#include "Principal.cpp"
+#include "Local.cpp"
 class Railway
 {
 public:
 	Railway();
-	vector<vector<int>> all_trains;		 //vettore di vettori -> ogni vettore = un treno
-	vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
 	void getTimetable();
 	void getLineDescription();
-	void checkTimetables(vector<int>& vect);
-
-	vector<Train> trenivect;
+	void checkTimetables();
+	
+	vector<vector<int>> all_trains;		 //vettore di vettori -> ogni vettore = un treno
+	vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
+	vector<Station> station_vect;
+	vector<Train> train_vect;
 };
-

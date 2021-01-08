@@ -1,5 +1,5 @@
-#ifndef ROOTTRAIN
-#define ROOTTRAIN
+#ifndef ROOTTRAINH
+#define ROOTTRAINH
 
 #include <iostream>
 #include <vector>
@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class Root 
+class RootTrain
 {
 public:
 	virtual void setSpeed(double speed) = 0;
