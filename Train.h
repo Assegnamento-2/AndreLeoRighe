@@ -14,8 +14,8 @@ public:
     const int start_station;
     const int start_time;
     const int type;
-    double current_pos;
-    double current_speed;
+    double current_pos = 0;//se il treno parte dal capolinea
+    double current_speed = 0;
     double max_speed;
 };
 #endif

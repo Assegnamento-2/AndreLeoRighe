@@ -4,18 +4,27 @@ Railway::Railway()
 {
     getTimetable();
     getLineDescription();
-    vector<Train> trenivect;
-    for (int i = 0; i < all_trains.size() - 1; i++)
-    {
-        vector<int> vect = all_trains[i];
-        if (vect[2] == 1)
-            Regional treno(vect);
-        if (vect[2] == 2)
-            HighSpeed treno(vect);
-        if (vect[2] == 3)
-            SuperSpeed treno(vect);
-        trenivect.push_back(treno_uno);
-    }
+
+    // for (int i = 0; i < all_trains.size() - 1; i++)
+    // {
+    //     vector<int> vect = all_trains[i];
+    //     checkTimetables(vect);
+    //     if (vect[2] == 1)
+    //     {
+    //         Regional treno(vect);
+    //         trenivect.push_back(treno);
+    //     }
+    //     if (vect[2] == 2)
+    //     {
+    //         HighSpeed treno(vect);
+    //         trenivect.push_back(treno);
+    //     }
+    //     if (vect[2] == 3)
+    //     {
+    //         SuperSpeed treno(vect);
+    //         trenivect.push_back(treno);
+    //     }
+    // }
 }
 
 void Railway::getTimetable()
@@ -44,9 +53,9 @@ void Railway::getTimetable()
         {
             all_trains[i][1] = 0;
         }
-        if (all_trains[i][2] != 1 || all_trains[i][2] != 0) //controlla che il tipo di treno sia accettabile, altrimenti gli assegna il ruolo di treno superveloce
+        if (all_trains[i][2] != 1 || all_trains[i][2] != 2) //controlla che il tipo di treno sia accettabile, altrimenti gli assegna il ruolo di treno superveloce
         {
-            all_trains[i][2] = 2;
+            all_trains[i][2] = 3;
         }
     }
 }
@@ -60,6 +69,8 @@ void Railway::getLineDescription()
         vector<string> arr;
         string input_line;
         getline(input, input_line);
+        if (input_line.empty())
+            continue;
         stringstream row;
         row.str(input_line);
         string num;
@@ -76,8 +87,14 @@ void Railway::getLineDescription()
         all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
     }
     input.close();
-    for (int i = 1; i < all_stations.size() - 1; i++) //perché size è 1 in più????
+    for (int i = 1; i < all_stations.size(); i++)
     {
+        // if (!(int w = stoi(all_stations[i][2])))
+        // {
+        //     all_stations.erase(all_stations.begin() + i);
+        //     cout<<i <<endl;
+        // }
+
         if (stoi(all_stations[i][1]) != 1) //controlla che il tipo di stazione sia accettabile, altrimenti le assegna il ruolo di stazione principale
         {
             all_stations[i][1] = "0";
@@ -85,36 +102,15 @@ void Railway::getLineDescription()
         if ((stoi(all_stations[i][2]) - stoi(all_stations[i - 1][2])) < 20) //cerca ed elimina opportunamente eventuali stazioni distanti meno di 20km fra loro
         {
             all_stations.erase(all_stations.begin() + i);
+            i--;
         }
     }
-};
-void Railway::checkTimetables()
+    if ((all_stations.size() - 1) < 2)
+    {
+        cout << "Non sono presenti abbastanza stazioni valide";
+        exit(EXIT_FAILURE);
+    }
+}
+void Railway::checkTimetables(vector<int> &vect)
 {
 }
-
-//for(int num : data)
-//    cout<<num<<endl;
-
-//primo numero = nome treno
-//secondo numero = stazione di partenza (0=origine / 1=capolinea)
-//terzo numero = tipo di treno (1=regionale)
-//quarto -> ... orari
-//if (data[2] == 1)
-//    Regional r = new Regional(data);
-// if (data[2] == 2)
-// 	HighSpeed hs = new HighSpeed(data);
-// if (data[2] == 3)
-// 	SuperHighSpeed shs = new SuperHighSpeed(data);
-
-// for(auto elem : all_trains)
-//     checkTimes(elem);
-//  void checkTimes(vector<int> times)
-//     {
-//         if (times[2] == 1)
-//             checkTimesRegional(times);
-//         if (times[2] == 2)
-//             checkTimesHSpeed(times);
-//         if (times[2] == 3)
-//             checkTimesSHSpeed(times);
-
-//     }

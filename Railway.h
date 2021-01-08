@@ -9,5 +9,8 @@ public:
 	vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
 	void getTimetable();
 	void getLineDescription();
-	void checkTimetables();
+	void checkTimetables(vector<int>& vect);
+
+	vector<Train> trenivect;
 };
+
