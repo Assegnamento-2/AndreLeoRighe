@@ -38,6 +38,7 @@ Railway::Railway()
             station_vect.push_back(stazione);
         }
     }
+    checkTimetables();
 }
 
 void Railway::getTimetable()
@@ -65,7 +66,7 @@ void Railway::getTimetable()
         }
         while (arr.size() < (all_stations.size() + 3)) //aggiunge celle al vettore in modo che ce ne siano tante quanti i dati che deve contenere, anche se mancanti
         {
-            arr.push_back(0);
+            arr.push_back(-1);
         }
         all_trains.push_back(arr);
     }
@@ -148,7 +149,7 @@ void Railway::checkTimetables()
     for (int num_treno = 0; num_treno < train_vect.size(); num_treno++)
     {
         int estimated_time;
-        if (train_vect[num_treno].start_station == 0)//se il treno parte dalla stazione di origine
+        if (train_vect[num_treno].start_station == 0) //se il treno parte dalla stazione di origine
         {
             if (train_vect[num_treno].type == 1) //se il treno è regionale e si ferma a ogni stazione
                 for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
@@ -157,17 +158,21 @@ void Railway::checkTimetables()
                     //(distanza fra stazioni - 10km(limite velocità)) / velocità max treno + trmpo per percorrere i 10 km a 80 km/h + 5 min attesa in stazione
                     if (num_staz == 1)
                         estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
+                    setETA(num_treno, num_staz, estimated_time);
                 }
 
-            else
+            else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
                 for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
                 {
                     estimated_time = (double)((station_vect[num_staz].distance - station_vect[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80);
+                    if (num_staz == 1)
+                        estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
+                    setETA(num_treno, num_staz, estimated_time);
                 }
             }
         }
-        else//se il treno non parte dalla stazione di origine
+        else //se il treno non parte dalla stazione di origine
         {
             if (train_vect[num_treno].type == 1) //se il treno è regionale e si ferma a ogni stazione
                 for (int num_staz = principal_stations.size(); num_staz > 0; num_staz--)
@@ -176,15 +181,27 @@ void Railway::checkTimetables()
                     //(distanza fra stazioni - 10km(limite velocità)) / velocità max treno + trmpo per percorrere i 10 km a 80 km/h + 5 min attesa in stazione
                     if (num_staz == principal_stations.size())
                         estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
+                    setETA(num_treno, num_staz, estimated_time);
                 }
 
-            else
+            else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
                 for (int num_staz = principal_stations.size(); num_staz > 0; num_staz--)
                 {
                     estimated_time = (double)((principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80);
+                    if (num_staz == principal_stations.size())
+                        estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
+                    setETA(num_treno, num_staz, estimated_time);
                 }
             }
         }
     }
+}
+void Railway::setETA(int treno, int stazione, int checked_eta) //modifica l'ETA
+{
+    if (train_vect[treno].eta[stazione] < 0) //se non era presente viene settato con i tempi minimi previsti + un margine di 10 minuti
+        train_vect[treno].eta[stazione] = checked_eta + 10;
+
+    else if (train_vect[treno].eta[stazione] < checked_eta) //se l'ETA era presente ma non compatibile con i limiti di velocità, viene modificato con i tempi di percorrenza più brevi compatibili con tali limiti
+        train_vect[treno].eta[stazione] = checked_eta;
 }
