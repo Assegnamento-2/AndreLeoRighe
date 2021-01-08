@@ -22,7 +22,6 @@ public:
 	//virtual ~T();
 	int numero;
 };
-//CIAORIGHE
 
 //class Regional : public Train
 //{
