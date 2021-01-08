@@ -1,16 +1,6 @@
-// #include <iostream>
-// #include <vector>
-// #include <cmath>
-// #include <string>
-// #include <fstream>
-// #include <sstream>
-
-
-// using namespace std;
-#ifndef RAILWAY
-#define RAILWAY
-#include "Train.h"
- class Train;
+#include "Regional.cpp"
+#include "HighSpeed.cpp"
+#include "SuperSpeed.cpp"
 class Railway
 {
 public:
@@ -19,6 +9,8 @@ public:
 	vector<vector<string>> all_stations; //vettore di vettori -> ogni vettore = una stazione
 	void getTimetable();
 	void getLineDescription();
-	void checkTimetables();
+	void checkTimetables(vector<int>& vect);
+
+	vector<Train> trenivect;
 };
-#endif
+
