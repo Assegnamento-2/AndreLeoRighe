@@ -69,47 +69,50 @@ void Railway::getLineDescription()
         vector<string> arr;
         string input_line;
         getline(input, input_line);
-        if (input_line.empty())
-            continue;
-        stringstream row;
-        row.str(input_line);
-        string num;
-        while (row >> num) //DA FARE: SE IL NOME STAZIONE È COMPOSTO DA PIÙ PAROLE VA MESSO NELLA STESSA CELLA DEL VETTORE
+        if (!input_line.empty())
         {
-            arr.push_back(num);
+            cout<<input_line;
+            stringstream row;
+            row.str(input_line);
+            string num;
+            while (row >> num) //DA FARE: SE IL NOME STAZIONE È COMPOSTO DA PIÙ PAROLE VA MESSO NELLA STESSA CELLA DEL VETTORE
+            {
+                arr.push_back(num);
+            }
+            if (is_first) //nel caso della prima stazione aggiunge tipologia e distanza
+            {
+                arr.push_back("0");
+                arr.push_back("0");
+                is_first = false;
+            }
+            all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
         }
-        if (is_first) //nel caso della prima stazione aggiunge tipologia e distanza
-        {
-            arr.push_back("0");
-            arr.push_back("0");
-            is_first = false;
-        }
-        all_stations.push_back(arr); //associo ad un elemento dell'array di STAZIONI il vettore del singolo treno
+        else break;
     }
     input.close();
-    for (int i = 1; i < all_stations.size(); i++)
-    {
-        // if (!(int w = stoi(all_stations[i][2])))
-        // {
-        //     all_stations.erase(all_stations.begin() + i);
-        //     cout<<i <<endl;
-        // }
+    // for (int i = 1; i < all_stations.size(); i++)
+    // {
+    //     // if (!(int w = stoi(all_stations[i][2])))
+    //     // {
+    //     //     all_stations.erase(all_stations.begin() + i);
+    //     //     cout<<i <<endl;
+    //     // }
 
-        if (stoi(all_stations[i][1]) != 1) //controlla che il tipo di stazione sia accettabile, altrimenti le assegna il ruolo di stazione principale
-        {
-            all_stations[i][1] = "0";
-        }
-        if ((stoi(all_stations[i][2]) - stoi(all_stations[i - 1][2])) < 20) //cerca ed elimina opportunamente eventuali stazioni distanti meno di 20km fra loro
-        {
-            all_stations.erase(all_stations.begin() + i);
-            i--;
-        }
-    }
-    if ((all_stations.size() - 1) < 2)
-    {
-        cout << "Non sono presenti abbastanza stazioni valide";
-        exit(EXIT_FAILURE);
-    }
+    //     if (stoi(all_stations[i][1]) != 1) //controlla che il tipo di stazione sia accettabile, altrimenti le assegna il ruolo di stazione principale
+    //     {
+    //         all_stations[i][1] = "0";
+    //     }
+    //     if ((stoi(all_stations[i][2]) - stoi(all_stations[i - 1][2])) < 20) //cerca ed elimina opportunamente eventuali stazioni distanti meno di 20km fra loro
+    //     {
+    //         all_stations.erase(all_stations.begin() + i);
+    //         i--;
+    //     }
+    // }
+    // if ((all_stations.size() - 1) < 2)
+    // {
+    //     cout << "Non sono presenti abbastanza stazioni valide";
+    //     exit(EXIT_FAILURE);
+    // }
 }
 void Railway::checkTimetables(vector<int> &vect)
 {
