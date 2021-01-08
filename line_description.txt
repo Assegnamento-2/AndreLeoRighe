@@ -6,6 +6,7 @@ Dolo 1 60
 Vigonza-Pianiga 5 80
 Busa 1 90
 Padova 0 120
+
 Rovigo 1 110
 udibe 1 130
 Ronchi 4 200
