@@ -164,8 +164,8 @@ void Railway::checkTimetables()
         if (train_vect[num_treno].type != 1) //se il treno è veloce o superveloce viene accorciato il vettore dei tempi di arrivo previsti, dato che si dovrà fermare in meno stazioni
             train_vect[num_treno].eta.resize(principal_stations.size());
 
-        int estimated_time;
-        
+        int estimated_time=0;
+
         if (train_vect[num_treno].start_station == 0) //se il treno parte dalla stazione di origine
         {
             if (train_vect[num_treno].type == 1) //se il treno è regionale e si ferma a ogni stazione
@@ -180,7 +180,7 @@ void Railway::checkTimetables()
 
             else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
-                for (int num_staz = 1; num_staz < principal_stations.size(); num_staz++)
+                for (int num_staz = 1; num_staz < principal_stations.size()-1; num_staz++)
                 {
                     estimated_time += (double)((principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80);
                     if (num_staz == 1)
@@ -203,7 +203,7 @@ void Railway::checkTimetables()
 
             else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
-                for (int num_staz = principal_stations.size(); num_staz > 0; num_staz--)
+                for (int num_staz = principal_stations.size()-1; num_staz > 0; num_staz--)
                 {
                     estimated_time += (double)((principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80);
                     if (num_staz == principal_stations.size())
