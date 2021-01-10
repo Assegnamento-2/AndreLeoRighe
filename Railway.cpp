@@ -180,7 +180,7 @@ void Railway::checkTimetables()
 
             else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
-                for (int num_staz = 1; num_staz < principal_stations.size()-1; num_staz++)
+                for (int num_staz = 1; num_staz < principal_stations.size(); num_staz++)
                 {
                     estimated_time += (double)((principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80);
                     if (num_staz == 1)
@@ -203,7 +203,7 @@ void Railway::checkTimetables()
 
             else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
-                for (int num_staz = principal_stations.size()-1; num_staz > 0; num_staz--)
+                for (int num_staz = principal_stations.size(); num_staz > 0; num_staz--)
                 {
                     estimated_time += (double)((principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80);
                     if (num_staz == principal_stations.size())
