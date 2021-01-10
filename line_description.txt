@@ -9,5 +9,5 @@ Padova 0 120
 
 Rovigo 1 80
 Udine 1 130
-Ronchi 4 2000
-miilano 1 500
+Milano 4 2000
+Ronchi 1 500
