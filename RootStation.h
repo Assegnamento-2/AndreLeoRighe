@@ -7,6 +7,7 @@
 
 class RootStation
 {
+    virtual void manage(vector<Train>& vect) = 0;
 };
 
 #endif

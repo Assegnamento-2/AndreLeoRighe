@@ -32,4 +32,7 @@ int main()
             cout << " P";
         cout << endl;
     }
+    double d=ceil((120-0-10)/(double)(300/60))+(double)(10/(double)(80/60))+10;
+    int f=ceil(double(1)/2);
+    cout<<f;
 }

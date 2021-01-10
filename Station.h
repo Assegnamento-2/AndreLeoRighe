@@ -5,11 +5,13 @@
 class Station : public RootStation
 {
 public:
-    Station(vector<string> vect);
-    
-    //vector<Train> elenco;
+    Station(vector<string>& vect);
+    void manage(vector<Train>& vect);
+    int free_binaries;
+    vector<Train> parking;
     const string name;
     const int type;
-    const int distance;
+    const double distance;
+    const double previous_distance;
 };
 #endif
