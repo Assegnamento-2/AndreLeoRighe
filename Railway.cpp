@@ -274,14 +274,14 @@ void Railway::run()
     bool stop = false;
     for (int time = 0; !stop; time++)
     {
-        sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
+        //sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
         //for (auto train : train_vect)
         for (int train = 0; train < train_vect.size(); train++) //setta il moved di tutti i treni a falso. si può fare nel for successivo?
             train_vect[train].moved = false;
         // for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
         bool is_not_first_station = false;
         //for (auto station : station_vect)
-        for(int station=0;station<station_vect.size();station++)
+        for (int station = 0; station < station_vect.size(); station++)
         {
             if (is_not_first_station)
             {
@@ -299,7 +299,7 @@ void Railway::run()
                 }
                 if (!train_manage.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
                 {
-                    station_vect[station].manage(train_manage, time);                     //viene chiamata la funzione per la gestione dei treni
+                    station_vect[station].manage(train_manage, time);       //viene chiamata la funzione per la gestione dei treni
                     for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
                         for (auto updated : train_manage)
                             if (train_vect[train].name == updated.name)
@@ -321,7 +321,6 @@ void Railway::run()
                 if (!train_start.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
                 {
                     station_vect[station].start(train_start, time);
-                    is_not_first_station = true;
                     for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
                         for (auto updated : train_start)
                             if (train_vect[train].name == updated.name)
@@ -329,9 +328,10 @@ void Railway::run()
                                 train_vect[train] = updated;
                             }
                 }
+                is_not_first_station = true;
             }
         }
-        //if (arrived_trains == train_vect.size())//se tutti i treni sono arrivati ferma il ciclo
+        // if (arrived_trains == train_vect.size()-1)//se tutti i treni sono arrivati ferma il ciclo
         if (time >= 500)
             stop = true;
     }
