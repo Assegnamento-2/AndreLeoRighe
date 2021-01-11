@@ -4,7 +4,7 @@
 messaggi durante la gestione di dati non validi dei check/scrivere che per scelta settiamo i trani a superveloci etc
 nomi di stazioni con spazi
 gestire treni partiti dopo mezzanotte
-move constructor(?)
+move constructor(?) FATTO
 wait>5?
 riatrdi?
 

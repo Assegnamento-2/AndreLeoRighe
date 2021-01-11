@@ -8,7 +8,7 @@ public:
     Station(vector<string>& vect);
     void manage(vector<Train>& vect, const int time);
     void start(vector<Train>& vect, const int time);
-    int free_binaries;
+    int free_binaries=2;
     vector<Train> parking;
     const string name;
     const int type;

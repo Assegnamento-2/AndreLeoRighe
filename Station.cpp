@@ -11,10 +11,10 @@ void Station::manage(vector<Train> &vect, const int time)
 
     for (int i = 0; i < vect.size(); i++)
     {
-        if (vect[i].current_pos < distance - 5)
+        if (vect[i].current_pos < distance - 5)//se è nella zona senza limiti di velocità
         {
-            vect[i].setSpeed(vect[i].max_speed);
-            if (vect[i - 1].current_pos < distance - 5 && vect[i - 1].current_pos - vect[i].current_pos <= 10 && i != 0) //se il treno precedente non è ancora arrivato al parcheggio e la distanza fra i due è <= 10km (e se non è il primo treno gestito, che per come è ordinato il vettore, non puô avere treni che lo rallentano)
+            vect[i].setSpeed(vect[i].max_speed);//viene settata alla velocità massima per il treno
+            if (i != 0 && vect[i - 1].current_pos < distance - 5 && vect[i - 1].current_pos - vect[i].current_pos <= 10) //se il treno precedente non è ancora arrivato al parcheggio e la distanza fra i due è <= 10km (e se non è il primo treno gestito, che per come è ordinato il vettore, non puô avere treni che lo rallentano)
             {
                 vect[i].setSpeed(vect[i - 1].current_speed); //setta la velocità del treno dietro uguale a quello che lo precede NON CREDO SERVA CONTROLLARE GLI ALTRI
                                                              // NON CREDO SERVA CONTROLLARE GLI ALTRI
@@ -27,7 +27,7 @@ void Station::manage(vector<Train> &vect, const int time)
                 free_binaries--;
                 vect[i].setSpeedLimit();
             }
-            if (free_binaries == 0)
+            else if (free_binaries == 0)
             {
                 vect[i].wait = 0;
                 vect[i].is_parked = true;
@@ -80,7 +80,7 @@ void Station::start(vector<Train> &vect, const int time)
         if (vect[i].start_time == time)
         {
             vect[i].setSpeedLimit();
-            cout << "Il treno " << vect[i].name << " è partito dalla stazione " << name << " alle " << time<<endl;
+            cout << "Il treno " << vect[i].name << " è partito dalla stazione " << name << " alle " << time << endl;
         }
         vect[i].updatePosition();
         vect[i].moved = true;
