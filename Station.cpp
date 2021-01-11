@@ -48,6 +48,7 @@ void Station::manage(vector<Train> &vect, const int time)
         {
             if (vect[i].wait == 0)
             {
+                vect[i].current_pos = distance;
                 cout << "Il treno " << vect[i].name << " è arrivato alla stazione " << name << " alle " << time;
                 if (time > vect[i].eta[station_number])
                     cout << ", con un ritardo di " << time - vect[i].eta[station_number] << " minuti";
@@ -56,18 +57,28 @@ void Station::manage(vector<Train> &vect, const int time)
                 if (time < vect[i].eta[station_number])
                     cout << ", in anticipo di " << vect[i].eta[station_number] - time << " minuti";
                 cout << endl;
+                 cout<<"wait 1"<<vect[i].wait<<endl;
             }
-            if (vect[i].wait < 5) //se sono passati meno di 5 minuti, continua ad aspettare
-            {
-                vect[i].setSpeed(0);
-                vect[i].wait++;
-            }
-            else if (vect[i].current_pos == distance && vect[i].wait == 5) //se sono passati 5 minuti può partire
+            if (vect[i].current_pos == distance && vect[i].wait == 5) //se sono passati 5 minuti può partire
             {
                 vect[i].wait = 0;
                 vect[i].setSpeedLimit();
                 free_binaries++;
+                cout<<"wait 2 "<<vect[i].wait<<endl;
+            
             }
+            else if (vect[i].wait < 5) //se sono passati meno di 5 minuti, continua ad aspettare
+            {
+                vect[i].setSpeed(0);
+                vect[i].wait++;
+                cout<<"wait 3"<<vect[i].wait<<endl;
+            }
+            // if (vect[i].current_pos == distance && vect[i].wait == 5) //se sono passati 5 minuti può partire
+            // {
+            //     vect[i].wait = 0;
+            //     vect[i].setSpeedLimit();
+            //     free_binaries++;
+            // }
         }
         vect[i].updatePosition();
         vect[i].moved = true;

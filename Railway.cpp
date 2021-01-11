@@ -280,14 +280,15 @@ void Railway::run()
             train_vect[train].moved = false;
         // for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
         bool is_not_first_station = false;
-        for (auto station : station_vect)
+        //for (auto station : station_vect)
+        for(int station=0;station<station_vect.size();station++)
         {
             if (is_not_first_station)
             {
                 vector<Train> train_manage;
                 for (auto train : train_vect)
                 {
-                    if (train.current_pos <= station.distance + 5 && !train.moved)
+                    if (train.current_pos <= station_vect[station].distance + 5 && !train.moved)
                     {
                         train_manage.push_back(train);
                     }
@@ -298,7 +299,7 @@ void Railway::run()
                 }
                 if (!train_manage.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
                 {
-                    station.manage(train_manage, time);                     //viene chiamata la funzione per la gestione dei treni
+                    station_vect[station].manage(train_manage, time);                     //viene chiamata la funzione per la gestione dei treni
                     for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
                         for (auto updated : train_manage)
                             if (train_vect[train].name == updated.name)
@@ -319,7 +320,7 @@ void Railway::run()
                 }
                 if (!train_start.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
                 {
-                    station.start(train_start, time);
+                    station_vect[station].start(train_start, time);
                     is_not_first_station = true;
                     for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
                         for (auto updated : train_start)
