@@ -57,7 +57,7 @@ void Station::manage(vector<Train> &vect, const int time)
                 if (time < vect[i].eta[station_number])
                     cout << ", in anticipo di " << vect[i].eta[station_number] - time << " minuti";
                 cout << endl;
-                 cout<<"wait 1"<<vect[i].wait<<endl;
+                cout<<"wait 1"<<vect[i].wait<<endl;
             }
             if (vect[i].current_pos == distance && vect[i].wait == 5) //se sono passati 5 minuti può partire
             {
@@ -82,6 +82,7 @@ void Station::manage(vector<Train> &vect, const int time)
         }
         vect[i].updatePosition();
         vect[i].moved = true;
+        cout<<time<<endl;
     }
 }
 void Station::start(vector<Train> &vect, const int time)
