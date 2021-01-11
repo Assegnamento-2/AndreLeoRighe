@@ -6,6 +6,7 @@ Railway::Railway()
     getTimetable();
 
     checkTimetables();
+    run();
 }
 bool Railway::compareStations(vector<string> &uno, vector<string> &due) //serve per ordinare le stazioni quando viene letto il line_description
 {
@@ -148,6 +149,7 @@ void Railway::getLineDescription()
     for (int i = 0; i < all_stations.size(); i++) //crea le stazioni e le inserisce nel vettore di stazioni
     {
         vector<string> vect = all_stations[i];
+        vect.push_back(to_string(i));
         if (i > 0) //aggiunge il parametro della distanza della stazione precedente rispetto all'origine(utile per la gestione della tratta)
         {
             vect.push_back(all_stations[i - 1][2]);
@@ -268,11 +270,13 @@ void Railway::setETA(int treno, int stazione, int checked_eta) //modifica l'ETA
 }
 void Railway::run()
 {
+    int arrived_trains = 0;
     bool stop = false;
-    for (int time = 0; stop; time++)
+    for (int time = 0; !stop; time++)
     {
         sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
-
+        for (auto train : train_vect)                                 //setta il moved di tutti i treni a falso. si può fare nel for successivo?
+            train.moved = false;
         // for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
         bool is_not_first_station = false;
         for (auto station : station_vect)
@@ -286,12 +290,30 @@ void Railway::run()
                     {
                         train_manage.push_back(train);
                     }
+                    if (train.current_pos >= station_vect.back().distance) //se un treno è arrivato all'ultima stazione, aumenta il contatore dei treni arrivati
+                    {
+                        arrived_trains++;
+                    }
                 }
-                station.manage(train_manage);
+                station.manage(train_manage, time);
             }
             else
+            {
+                vector<Train> train_start;
+                for (auto train : train_vect)
+                {
+                    if (train.current_pos <= 5)
+                    {
+                        train_start.push_back(train);
+                    }
+                }
+                station.start(train_start, time);
                 is_not_first_station = true;
+            }
         }
+        //if (arrived_trains == train_vect.size())//se tutti i treni sono arrivati ferma il ciclo
+        if(time>=500)
+            stop = true;
     }
 }
 

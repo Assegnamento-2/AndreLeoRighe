@@ -7,7 +7,8 @@
 
 class RootStation
 {
-    virtual void manage(vector<Train>& vect) = 0;
+    virtual void manage(vector<Train>& vect, const int time) = 0;
+    virtual void start(vector<Train>& vect, const int time) = 0;
 };
 
 #endif
