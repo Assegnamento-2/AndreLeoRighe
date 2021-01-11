@@ -17,7 +17,7 @@ int main()
             cout << "R ";
         if (prova1.train_vect[i].type == 2)
             cout << "V ";
-        else
+        if(prova1.train_vect[i].type == 3)
             cout << "S ";
 
         cout << prova1.train_vect[i].name << ": ";

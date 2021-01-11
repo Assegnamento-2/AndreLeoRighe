@@ -287,7 +287,7 @@ void Railway::run()
                 vector<Train> train_manage;
                 for (auto train : train_vect)
                 {
-                    if (train.current_pos <= station.distance && !train.moved)
+                    if (train.current_pos <= station.distance + 5 && !train.moved)
                     {
                         train_manage.push_back(train);
                     }
@@ -317,14 +317,17 @@ void Railway::run()
                         train_start.push_back(train);
                     }
                 }
-                station.start(train_start, time);
-                is_not_first_station = true;
-                for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
-                    for (auto updated : train_start)
-                        if (train_vect[train].name == updated.name)
-                        {
-                            train_vect[train] = updated;
-                        }
+                if (!train_start.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
+                {
+                    station.start(train_start, time);
+                    is_not_first_station = true;
+                    for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
+                        for (auto updated : train_start)
+                            if (train_vect[train].name == updated.name)
+                            {
+                                train_vect[train] = updated;
+                            }
+                }
             }
         }
         //if (arrived_trains == train_vect.size())//se tutti i treni sono arrivati ferma il ciclo
