@@ -332,8 +332,10 @@ void Railway::run()
             }
         }
         // if (arrived_trains == train_vect.size()-1)//se tutti i treni sono arrivati ferma il ciclo
-        if (time >= 500)
-            stop = true;
+        if (time >= 800)
+            {cout<<arrived_trains<<endl;
+                stop = true;
+            }
     }
 }
 
