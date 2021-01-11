@@ -5,55 +5,23 @@ Railway::Railway()
     getLineDescription();
     getTimetable();
 
-    for (int i = 0; i < all_trains.size(); i++) //crea i treni e li inserisce nel vettore di treni
-    {
-        vector<int> vect = all_trains[i];
-        if (vect[2] == 1)
-        {
-            Regional treno(vect);
-            train_vect.push_back(treno);
-        }
-        if (vect[2] == 2)
-        {
-            HighSpeed treno(vect);
-            train_vect.push_back(treno);
-        }
-        if (vect[2] == 3)
-        {
-            SuperSpeed treno(vect);
-            train_vect.push_back(treno);
-        }
-    }
-    for (int i = 0; i < all_stations.size(); i++) //crea le stazioni e le inserisce nel vettore di stazioni
-    {
-        vector<string> vect = all_stations[i];
-        if(i>0)
-        {
-            vect.push_back(all_stations[i-1][2]);
-        }
-        else vect.push_back("-1");
-        if (vect[1] == "0")
-        {
-            Principal stazione(vect);
-            station_vect.push_back(stazione);
-        }
-        if (vect[1] == "1")
-        {
-            Local stazione(vect);
-            station_vect.push_back(stazione);
-        }
-    }
     checkTimetables();
 }
 bool Railway::compareStations(vector<string> &uno, vector<string> &due) //serve per ordinare le stazioni quando viene letto il line_description
 {
     return stoi(uno[2]) < stoi(due[2]);
 }
-bool Railway::compareTrains(vector<int> &uno, vector<int> &due) //serve per ordinare i treni quando viene letto il timetable
+bool Railway::compareTrainsStart(vector<int> &uno, vector<int> &due) //serve per ordinare i treni quando viene letto il timetable
 {
     if (uno[3] == due[3]) //a parità di orario, il treno più veloce parte prima
         return uno[2] > due[2];
     return uno[3] < due[3];
+}
+bool Railway::compareTrainsPos(Train &uno, Train &due) //serve per ordinare i treni durante la gestione della giornata
+{
+    if (uno.current_pos == due.current_pos) //a parità di posizione, il treno che attende da più tempo verrà gestito prima
+        return uno.wait > due.wait;
+    return uno.current_pos > due.current_pos;
 }
 void Railway::getTimetable()
 {
@@ -104,7 +72,27 @@ void Railway::getTimetable()
             all_trains[i][3] = 0;
         }
     }
-    sort(all_trains.begin(), all_trains.end(), compareTrains);
+    sort(all_trains.begin(), all_trains.end(), compareTrainsStart);
+
+    for (int i = 0; i < all_trains.size(); i++) //crea i treni e li inserisce nel vettore di treni
+    {
+        vector<int> vect = all_trains[i];
+        if (vect[2] == 1)
+        {
+            Regional treno(vect);
+            train_vect.push_back(treno);
+        }
+        if (vect[2] == 2)
+        {
+            HighSpeed treno(vect);
+            train_vect.push_back(treno);
+        }
+        if (vect[2] == 3)
+        {
+            SuperSpeed treno(vect);
+            train_vect.push_back(treno);
+        }
+    }
 }
 void Railway::getLineDescription()
 {
@@ -156,35 +144,54 @@ void Railway::getLineDescription()
         exit(EXIT_FAILURE);
     }
     all_stations[all_stations.size() - 1][1] = "0"; //setta la stazione capolinea come principale
-}
-void Railway::checkTimetables()
-{
-    vector<Station> principal_stations;           //crea un vettore di stazioni principali
-    for (int i = 0; i < station_vect.size(); i++) //e lo riempie opportunatamente
+
+    for (int i = 0; i < all_stations.size(); i++) //crea le stazioni e le inserisce nel vettore di stazioni
+    {
+        vector<string> vect = all_stations[i];
+        if (i > 0) //aggiunge il parametro della distanza della stazione precedente rispetto all'origine(utile per la gestione della tratta)
+        {
+            vect.push_back(all_stations[i - 1][2]);
+        }
+        else //nel caso della prima stazione inserisce come distanza della stazione precedente rispetto all'origine -1
+            vect.push_back("-1");
+        if (vect[1] == "0")
+        {
+            Principal stazione(vect);
+            station_vect.push_back(stazione);
+        }
+        if (vect[1] == "1")
+        {
+            Local stazione(vect);
+            station_vect.push_back(stazione);
+        }
+    }
+    for (int i = 0; i < station_vect.size(); i++) //riempie il vettore delle stazioni principali
     {
         if (station_vect[i].type == 0)
         {
             principal_stations.push_back(station_vect[i]);
         }
     }
-
+}
+void Railway::checkTimetables()
+{
     for (int num_treno = 0; num_treno < train_vect.size(); num_treno++)
     {
         if (train_vect[num_treno].type != 1) //se il treno è veloce o superveloce viene accorciato il vettore dei tempi di arrivo previsti, dato che si dovrà fermare in meno stazioni
             train_vect[num_treno].eta.resize(principal_stations.size());
 
-        int estimated_time = train_vect[num_treno].start_time;
+        double estimated_time = train_vect[num_treno].start_time;
 
         if (train_vect[num_treno].start_station == 0) //se il treno parte dalla stazione di origine
         {
             if (train_vect[num_treno].type == 1) //se il treno è regionale e si ferma a ogni stazione
                 for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
                 {
-                    estimated_time += ceil((double)((station_vect[num_staz].distance - station_vect[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80)) + 5; //tempo previsto per andare da una stazione alla successiva
+                    estimated_time += (double)(station_vect[num_staz].distance - station_vect[num_staz - 1].distance - 10) / train_vect[num_treno].max_speed + (double)((10 * 60) / 80) + 5;
                     //(distanza fra stazioni - 10km(limite velocità)) / velocità max treno + trmpo per percorrere i 10 km a 80 km/h + 5 min attesa in stazione
                     if (num_staz == 1)
                         estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
-                    setETA(num_treno, num_staz, estimated_time);
+                    setETA(num_treno, num_staz, ceil(estimated_time));
                     estimated_time = train_vect[num_treno].eta[num_staz];
                 }
 
@@ -192,12 +199,11 @@ void Railway::checkTimetables()
             {
                 for (int num_staz = 1; num_staz < principal_stations.size(); num_staz++)
                 {
-                    estimated_time += ceil((double)(principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed) + (double)((10 * 60) / 80)) + 5;
-                    //estimated_time += ceil()
+                    estimated_time += (double)(principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / train_vect[num_treno].max_speed + (double)(10 * 60) / 80 + 5;
                     //(distanza fra stazioni - 10km(limite velocità)) / velocità max treno + trmpo per percorrere i 10 km a 80 km/h + 5 min attesa in stazione
                     if (num_staz == 1)
                         estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
-                    setETA(num_treno, num_staz, estimated_time);
+                    setETA(num_treno, num_staz, ceil(estimated_time));
                     estimated_time = train_vect[num_treno].eta[num_staz];
                 }
             }
@@ -205,23 +211,26 @@ void Railway::checkTimetables()
         else //se il treno non parte dalla stazione di origine
         {
             if (train_vect[num_treno].type == 1) //se il treno è regionale e si ferma a ogni stazione
-                for (int num_staz = station_vect.size(); num_staz > 0; num_staz--)
+                for (int num_staz = station_vect.size() - 1; num_staz > 0; num_staz--)
                 {
-                    estimated_time += (double)((station_vect[num_staz].distance - station_vect[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80) + 5; //tempo previsto per andare da una stazione alla successiva
+                    estimated_time += (double)(station_vect[num_staz].distance - station_vect[num_staz - 1].distance - 10) / train_vect[num_treno].max_speed + (double)((10 * 60) / 80) + 5;
                     //(distanza fra stazioni - 10km(limite velocità)) / velocità max treno + trmpo per percorrere i 10 km a 80 km/h + 5 min attesa in stazione
-                    if (num_staz == station_vect.size())
+                    if (num_staz == station_vect.size() - 1)
                         estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
-                    setETA(num_treno, num_staz, estimated_time);
+                    setETA(num_treno, num_staz, ceil(estimated_time));
+                    estimated_time = train_vect[num_treno].eta[station_vect.size() - num_staz];
                 }
 
             else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
-                for (int num_staz = principal_stations.size(); num_staz > 0; num_staz--)
+                for (int num_staz = principal_stations.size() - 1; num_staz > 0; num_staz--)
                 {
-                    estimated_time += (double)((principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / (double)(train_vect[num_treno].max_speed)) + (double)((10 * 60) / 80);
-                    if (num_staz == principal_stations.size())
+                    estimated_time += (double)(principal_stations[num_staz].distance - principal_stations[num_staz - 1].distance - 10) / train_vect[num_treno].max_speed + (double)(10 * 60) / 80 + 5;
+                    //(distanza fra stazioni - 10km(limite velocità)) / velocità max treno + trmpo per percorrere i 10 km a 80 km/h + 5 min attesa in stazione
+                    if (num_staz == principal_stations.size() - 1)
                         estimated_time -= 5; //nel caso della prima stazione vengono tolti i 5 minuti di attesa
-                    setETA(num_treno, num_staz, estimated_time);
+                    setETA(num_treno, num_staz, ceil(estimated_time));
+                    estimated_time = train_vect[num_treno].eta[principal_stations.size() - num_staz];
                 }
             }
         }
@@ -239,11 +248,22 @@ void Railway::setETA(int treno, int stazione, int checked_eta) //modifica l'ETA
     }
     else
     {
-        if (train_vect[treno].eta[stazione] < 0) //se non era presente viene settato con i tempi minimi previsti + un margine di 10 minuti
-            train_vect[treno].eta[stazione] = checked_eta + 10;
+        if (train_vect[treno].type == 1)
+        {
+            if (train_vect[treno].eta[station_vect.size() - stazione] < 0) //se non era presente viene settato con i tempi minimi previsti + un margine di 10 minuti
+                train_vect[treno].eta[station_vect.size() - stazione] = checked_eta + 10;
 
-        else if (train_vect[treno].eta[stazione] < checked_eta) //se l'ETA era presente ma non compatibile con i limiti di velocità, viene modificato con i tempi di percorrenza più brevi compatibili con tali limiti
-            train_vect[treno].eta[stazione] = checked_eta;
+            else if (train_vect[treno].eta[station_vect.size() - stazione] < checked_eta) //se l'ETA era presente ma non compatibile con i limiti di velocità, viene modificato con i tempi di percorrenza più brevi compatibili con tali limiti
+                train_vect[treno].eta[station_vect.size() - stazione] = checked_eta;
+        }
+        else
+        {
+            if (train_vect[treno].eta[principal_stations.size() - stazione] < 0) //se non era presente viene settato con i tempi minimi previsti + un margine di 10 minuti
+                train_vect[treno].eta[principal_stations.size() - stazione] = checked_eta + 10;
+
+            else if (train_vect[treno].eta[principal_stations.size() - stazione] < checked_eta) //se l'ETA era presente ma non compatibile con i limiti di velocità, viene modificato con i tempi di percorrenza più brevi compatibili con tali limiti
+                train_vect[treno].eta[principal_stations.size() - stazione] = checked_eta;
+        }
     }
 }
 void Railway::run()
@@ -251,7 +271,7 @@ void Railway::run()
     bool stop = false;
     for (int time = 0; stop; time++)
     {
-         //ORDINARE I TRENI PER POSIZIONE
+        sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
 
         // for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
         bool is_not_first_station = false;

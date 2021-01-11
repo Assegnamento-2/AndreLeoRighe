@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "vector": "cpp"
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "fstream": "cpp",
+        "ios": "cpp",
+        "string": "cpp",
+        "type_traits": "cpp"
     }
 }

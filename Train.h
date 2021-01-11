@@ -8,10 +8,10 @@ public:
     void setSpeed(double speed);
     void setSpeedLimit();
     void updatePosition();
-    const int name;
-    const int start_station;
-    const int start_time;
-    const int type;
+     int name; //per il const probabilmente serve il move constructor
+     int start_station;
+     int start_time;
+     int type;
     bool moved = false; //in run(railway.cpp) serve per verificare se il treno è già stato mosso nel minuto
     bool is_parked = false;
     vector<int> eta;        //vettore che contiene gli Estimated Time of Arrival
