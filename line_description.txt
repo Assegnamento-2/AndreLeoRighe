@@ -1,13 +1,13 @@
 Venezia-SL
-Mestre 1 15
-Mirano 1 30
+Mestre 0 15
+Mirano 0 30
 
-Dolo 1 60
+Dolo 0 60
 Vigonza-Pianiga 5 
-Busa 1 90
+Busa 0 90
 Padova 0 120
 
-Rovigo 1 80
-Udine 1 130
+Rovigo 0 80
+Udine 0 130
 Milano 4 2000
-Ronchi 1 500
+Ronchi 0 500
