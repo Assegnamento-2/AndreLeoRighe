@@ -5,30 +5,31 @@
 
 int main()
 {
-    Railway prova1;
+    Railway ferrovia;
+    ferrovia.run();
     // Train s;
     // Regional k;
 
-    //vector<int> trenouno = prova1.all_trains[1];
-    //cout << prova1.all_stations.size() << endl;
-    for (int i = 0; i < prova1.train_vect.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
+    //vector<int> trenouno = ferrovia.all_trains[1];
+    //cout << ferrovia.all_stations.size() << endl;
+    for (int i = 0; i < ferrovia.train_vect.size(); i++) //ALL TRAINS E ALL STATIONS OK! :)
     {
-        if (prova1.train_vect[i].type == 1)
+        if (ferrovia.train_vect[i].type == 1)
             cout << "R ";
-        if (prova1.train_vect[i].type == 2)
+        if (ferrovia.train_vect[i].type == 2)
             cout << "V ";
-        if(prova1.train_vect[i].type == 3)
+        if(ferrovia.train_vect[i].type == 3)
             cout << "S ";
 
-        cout << prova1.train_vect[i].name << ": ";
-        for (int k = 0; k < prova1.train_vect[i].eta.size(); k++)
-            cout << prova1.train_vect[i].eta[k] << ' ';
+        cout << ferrovia.train_vect[i].name << ": ";
+        for (int k = 0; k < ferrovia.train_vect[i].eta.size(); k++)
+            cout << ferrovia.train_vect[i].eta[k] << ' ';
         cout << endl;
     }
-    for (int i = 0; i < prova1.station_vect.size(); i++)
+    for (int i = 0; i < ferrovia.station_vect.size(); i++)
     {
-        cout << prova1.station_vect[i].name << ' ' << prova1.station_vect[i].distance;
-        if (prova1.station_vect[i].type%2 == 0)
+        cout << ferrovia.station_vect[i].name << ' ' << ferrovia.station_vect[i].distance;
+        if (ferrovia.station_vect[i].type%2 == 0)
             cout << " P";
         cout << endl;
     }

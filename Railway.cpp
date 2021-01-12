@@ -6,7 +6,7 @@ Railway::Railway()
     getTimetable();
 
     checkTimetables();
-    run();
+    
 }
 bool Railway::compareStations(vector<string> &uno, vector<string> &due) //serve per ordinare le stazioni quando viene letto il line_description
 {
@@ -274,7 +274,7 @@ void Railway::run()
     bool stop = false;
     for (int time = 0; !stop; time++)
     {
-        //sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
+        // sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
         //for (auto train : train_vect)
         for (int train = 0; train < train_vect.size(); train++)
         { //setta il moved di tutti i treni a falso. si può fare nel for successivo?
