@@ -4,6 +4,7 @@ In lettura della time table, l'unico dato che invalida il treno è il nome; gli 
 Il transito di treni Veloci e Superveloci per stazioni locali non è gestito correttamente.
 I nomi delle stazioni non possono contenere spazi.
 
+
 messaggi durante la gestione di dati non validi dei check/scrivere che per scelta settiamo i trani a superveloci etc
 nomi di stazioni con spazi
 gestire treni partiti dopo mezzanotte
