@@ -276,8 +276,11 @@ void Railway::run()
     {
         //sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
         //for (auto train : train_vect)
-        for (int train = 0; train < train_vect.size(); train++) //setta il moved di tutti i treni a falso. si può fare nel for successivo?
+        for (int train = 0; train < train_vect.size(); train++){ //setta il moved di tutti i treni a falso. si può fare nel for successivo?
             train_vect[train].moved = false;
+            if(train_vect[train].has_arrived)
+                arrived_trains++;
+        }
         // for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
         bool is_not_first_station = false;
         //for (auto station : station_vect)
