@@ -1,13 +1,13 @@
 Venezia-SL
 Mestre 0 15
-Mirano 0 30
+Mirano 0 1030
 
 Dolo 0 60
 Vigonza-Pianiga 5 
 Busa 0 90
 Padova 0 120
 
-Rovigo 0 80
+Rovigo 0 140
 Udine 0 130
 Monza 0 345
 Varese 0 560
