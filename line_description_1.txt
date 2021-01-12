@@ -1,1 +1,12 @@
-Napoli
+Napoli 
+Latina 1 34
+Frosinone 1 56
+Aprilia 4 190
+Roma 0 150
+Siena 3 249
+Firenze 0 356
+Livorno 1 300
+Lucca 1 500
+Pisa 1 678
+La-Spezia 1 600
+Genova 0 1002
