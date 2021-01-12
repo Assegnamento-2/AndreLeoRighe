@@ -7,8 +7,6 @@ int main()
 {
     Railway ferrovia;
     ferrovia.run();
-    // Train s;
-    // Regional k;
 
     //vector<int> trenouno = ferrovia.all_trains[1];
     //cout << ferrovia.all_stations.size() << endl;

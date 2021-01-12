@@ -1,6 +1,6 @@
 Venezia-SL
 Mestre 0 15
-Mirano 0 1030
+Mirano 0 30
 
 Dolo 0 60
 Vigonza-Pianiga 5 

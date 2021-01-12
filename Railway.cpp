@@ -6,7 +6,6 @@ Railway::Railway()
     getTimetable();
 
     checkTimetables();
-    
 }
 bool Railway::compareStations(vector<string> &uno, vector<string> &due) //serve per ordinare le stazioni quando viene letto il line_description
 {
@@ -14,12 +13,17 @@ bool Railway::compareStations(vector<string> &uno, vector<string> &due) //serve 
 }
 bool Railway::compareTrainsStart(vector<int> &uno, vector<int> &due) //serve per ordinare i treni quando viene letto il timetable
 {
-    if (uno[3] == due[3]) //a parità di orario, il treno più veloce parte prima
-        return uno[2] > due[2];
-    return uno[3] < due[3];
+    if (uno[1] == due[1]) //a parità di stazione di partenza vengono ordinati per orario e tipo
+    {
+        if (uno[3] == due[3]) //a parità di orario, il treno più veloce parte prima
+            return uno[2] > due[2];
+        return uno[3] < due[3];
+    }
+    return uno[1] < due[1];
 }
 bool Railway::compareTrainsPos(Train &uno, Train &due) //serve per ordinare i treni durante la gestione della giornata
 {
+
     if (uno.current_pos == due.current_pos) //a parità di posizione, il treno che attende da più tempo verrà gestito prima
         return uno.wait > due.wait;
     return uno.current_pos > due.current_pos;
@@ -64,16 +68,18 @@ void Railway::getTimetable()
         {
             all_trains[i][1] = 0;
         }
-        if (all_trains[i][2] != 1 && all_trains[i][2] != 2) //controlla che il tipo di treno sia accettabile, altrimenti gli assegna il ruolo di treno superveloce
+        if (all_trains[i][2] != 3 && all_trains[i][2] != 2) //controlla che il tipo di treno sia accettabile, altrimenti gli assegna il ruolo di treno regionale
         {
-            all_trains[i][2] = 3;
+            all_trains[i][2] = 1;
         }
-        if (all_trains[i][3] < 0) //controlla che l'orario di partenza sia accettabile, altrimenti lo setta a 0
+        if (all_trains[i][3] < 0 || all_trains[i][3] >= 1440) //controlla che l'orario di partenza sia accettabile, altrimenti lo setta a 0
         {
             all_trains[i][3] = 0;
         }
+        if (all_trains[i][1] == 1)
+            all_trains[i][1] = station_vect[station_vect.size() - 1].distance;
     }
-    sort(all_trains.begin(), all_trains.end(), compareTrainsStart);
+    sort(all_trains.begin(), all_trains.end(), compareTrainsStart); //ordina i treni per stazione di partenza, orario di partenza e tipologia di treno(in quest'ordine)
 
     for (int i = 0; i < all_trains.size(); i++) //crea i treni e li inserisce nel vettore di treni
     {
@@ -145,6 +151,7 @@ void Railway::getLineDescription()
         exit(EXIT_FAILURE);
     }
     all_stations[all_stations.size() - 1][1] = "2"; //setta i capolinea come stazioni di tipo 2
+    all_stations[0][1] = "2";
 
     for (int i = 0; i < all_stations.size(); i++) //crea le stazioni e le inserisce nel vettore di stazioni
     {
@@ -156,7 +163,7 @@ void Railway::getLineDescription()
         }
         else //nel caso della prima stazione inserisce come distanza della stazione precedente rispetto all'origine -1
             vect.push_back("-1");
-        if (vect[1] == "0"||vect[1] == "2")
+        if (vect[1] == "0" || vect[1] == "2")
         {
             Primary stazione(vect);
             station_vect.push_back(stazione);
@@ -169,7 +176,7 @@ void Railway::getLineDescription()
     }
     for (int i = 0; i < station_vect.size(); i++) //riempie il vettore delle stazioni principali
     {
-        if (station_vect[i].type%2 == 0)
+        if (station_vect[i].type % 2 == 0)
         {
             primary_stations.push_back(station_vect[i]);
         }
@@ -199,7 +206,7 @@ void Railway::checkTimetables()
 
             else //se il treno è veloce o superveloce e si ferma solo nelle stazioni  principali
             {
-                for (int num_staz = 1; num_staz <primary_stations.size(); num_staz++)
+                for (int num_staz = 1; num_staz < primary_stations.size(); num_staz++)
                 {
                     estimated_time += (double)(primary_stations[num_staz].distance - primary_stations[num_staz - 1].distance - 10) / train_vect[num_treno].max_speed + (double)(10 * 60) / 80 + 5;
                     //(distanza fra stazioni - 10km(limite velocità)) / velocità max treno + trmpo per percorrere i 10 km a 80 km/h + 5 min attesa in stazione
@@ -274,17 +281,16 @@ void Railway::run()
     bool stop = false;
     for (int time = 0; !stop; time++)
     {
-        // sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
-        //for (auto train : train_vect)
-        for (int train = 0; train < train_vect.size(); train++)
-        { //setta il moved di tutti i treni a falso. si può fare nel for successivo?
+
+        //sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa
+
+        for (int train = 0; train < train_vect.size(); train++) //setta il moved di tutti i treni a falso.
+        {
             train_vect[train].moved = false;
-            // if (train_vect[train].has_arrived)
-            //     arrived_trains++;
         }
-        // for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
-        bool is_not_first_station = false;
-        //for (auto station : station_vect)
+
+        bool is_not_first_station = false; //boolean per sapere se sono stati già gestiti i treni dalla prima stazione
+
         for (int station = 0; station < station_vect.size(); station++)
         {
             if (is_not_first_station)
@@ -292,7 +298,7 @@ void Railway::run()
                 vector<Train> train_manage;
                 for (auto train : train_vect)
                 {
-                    if (train.current_pos <= station_vect[station].distance + 5 && !train.moved && !train.has_arrived)
+                    if (train.current_pos <= station_vect[station].distance + 5 && !train.moved && !train.has_arrived && train.start_station == 0)
                     {
                         train_manage.push_back(train);
                     }
@@ -317,7 +323,7 @@ void Railway::run()
                 vector<Train> train_start;
                 for (auto train : train_vect)
                 {
-                    if (train.current_pos <= 5)
+                    if (train.current_pos <= 5 && train.start_station == 0)
                     {
                         train_start.push_back(train);
                     }
@@ -335,17 +341,62 @@ void Railway::run()
                 is_not_first_station = true;
             }
         }
-        if(arrived_trains == train_vect.size())//se tutti i treni sono arrivati ferma il ciclo
+
+        is_not_first_station = false;
+        for (int station = station_vect.size() - 1; station >= 0; station--)
+        {
+            if (is_not_first_station)
+            {
+                vector<Train> train_manage;
+                for (auto train : train_vect)
+                {
+                    if (train.current_pos >= station_vect[station].distance - 5 && !train.moved && !train.has_arrived && train.start_station == 1)
+                    {
+                        train_manage.push_back(train);
+                    }
+                }
+                if (!train_manage.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
+                {
+                    station_vect[station].manage(train_manage, time);       //viene chiamata la funzione per la gestione dei treni
+                    for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
+                        for (auto updated : train_manage)
+                            if (train_vect[train].name == updated.name)
+                            {
+                                train_vect[train] = updated;
+                                if (updated.has_arrived) //se un treno è arrivato all'ultima stazione, aumenta il contatore dei treni arrivati
+                                {
+                                    arrived_trains++;
+                                }
+                            }
+                }
+            }
+            else
+            {
+                vector<Train> train_start;
+                for (auto train : train_vect)
+                {
+                    if (train.current_pos >= station_vect[station].distance - 5 && train.start_station == 1)
+                    {
+                        train_start.push_back(train);
+                    }
+                }
+                if (!train_start.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
+                {
+                    station_vect[station].start(train_start, time);
+                    for (int train = 0; train < train_vect.size(); train++) //copia eventuali modifiche ai treni di train_start nei corrispettivi treni di train_vect
+                        for (auto updated : train_start)
+                            if (train_vect[train].name == updated.name)
+                            {
+                                train_vect[train] = updated;
+                            }
+                }
+                is_not_first_station = true;
+            }
+        }
+
+        if (arrived_trains == train_vect.size() || time == 500) //se tutti i treni sono arrivati ferma il ciclo
         {
             stop = true;
         }
     }
 }
-
-// railway r; -> crea un treno di tipo regional
-
-// regional.move()
-// trainvect[2].max_speed
-
-// for (auto train : train_vect)
-//     train.updatePosition();
