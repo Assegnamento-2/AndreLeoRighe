@@ -1,3 +1,5 @@
+Jacopo Righetto
+
 #ifndef ROOTTRAINH
 #define ROOTTRAINH
 
