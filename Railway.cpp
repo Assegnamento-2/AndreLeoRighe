@@ -335,7 +335,7 @@ void Railway::run()
                 is_not_first_station = true;
             }
         }
-        if (arrived_trains == train_vect.size())//se tutti i treni sono arrivati ferma il ciclo
+        if (time == 900)//arrived_trains == train_vect.size())//se tutti i treni sono arrivati ferma il ciclo
         {
             stop = true;
         }

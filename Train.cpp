@@ -36,7 +36,7 @@ void Train::setSpeed(double speed) //setta la velocità richiesta, se superiore 
 }
 void Train::setSpeedLimit() //setta il limite di velocità a 80km/h nella zona vicino alla stazione
 {
-	current_speed = (double)80 / 60;
+	current_speed = 80.00 / 60.00;
 }
 void Train::updatePosition() //modifica la posizione del treno dopo un minuto
 {
