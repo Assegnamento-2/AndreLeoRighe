@@ -1,3 +1,5 @@
+Jacopo Righetto
+
 #ifndef REGIONALC
 #define REGIONALC
 
