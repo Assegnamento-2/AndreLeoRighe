@@ -9,7 +9,7 @@ Padova 0 120
 
 Rovigo 0 80
 Udine 0 130
-Monza 1 340
-Varese 1 560
+Monza 0 345
+Varese 0 560
 Milano 4 2000
 Ronchi 0 500
