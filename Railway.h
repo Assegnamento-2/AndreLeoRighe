@@ -1,4 +1,4 @@
-#include "Principal.cpp"
+#include "Primary.cpp"
 #include "Local.cpp"
 class Railway
 {
@@ -17,5 +17,5 @@ public:
 	static bool compareTrainsPos(Train &uno, Train &due);				   //serve per ordinare i treni quando durante la gestione della giornata
 	vector<Station> station_vect;										   //vettore di stazioni
 	vector<Train> train_vect;											   //vettore di treni
-	vector<Station> principal_stations;									   //crea un vettore di stazioni principali
+	vector<Station> primary_stations;									   //crea un vettore di stazioni principali
 };

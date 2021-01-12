@@ -28,7 +28,7 @@ int main()
     for (int i = 0; i < prova1.station_vect.size(); i++)
     {
         cout << prova1.station_vect[i].name << ' ' << prova1.station_vect[i].distance;
-        if (prova1.station_vect[i].type == 0)
+        if (prova1.station_vect[i].type%2 == 0)
             cout << " P";
         cout << endl;
     }

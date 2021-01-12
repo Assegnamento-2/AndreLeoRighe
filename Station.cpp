@@ -58,13 +58,13 @@ void Station::manage(vector<Train> &vect, const int time)
                     cout << ", in anticipo di " << vect[i].eta[station_number] - time << " minuti";
                 cout << endl;
             }
-            if ( vect[i].wait == 5) //se sono passati 5 minuti può partire   vect[i].current_pos == distance &&
+            if (vect[i].wait == 5) //se sono passati 5 minuti può partire   vect[i].current_pos == distance &&
             {
                 vect[i].wait = 0;
                 vect[i].setSpeedLimit();
                 free_binaries++;
-                cout<<"TRENO PARTITO DA "<<name<<" alle "<<time<<endl;
-                if (station_number == 6)
+                cout << "TRENO PARTITO DA " << name << " alle " << time << endl;
+                if (type == 2)
                 {
                     vect[i].has_arrived = true;
                     vect[i].setSpeed(0);
