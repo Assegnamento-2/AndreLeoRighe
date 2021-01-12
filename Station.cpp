@@ -44,7 +44,7 @@ void Station::manage(vector<Train> &vect, const int time)
         {
             vect[i].wait++;
         }
-        else if (vect[i].current_pos >= distance && vect[i].current_pos < distance - 1 + 2.00 / 3 + (80.00 / 60.00) + 1.00 / 3) //se il treno è  nella stazione (0.1 approssimazione della distanza)
+        else if (vect[i].current_pos >= distance && vect[i].current_pos < distance +(80.00 / 60.00)-0.1)//- 1 + 2.00 / 3 + (80.00 / 60.00) + 1.00 / 3) //se il treno è  nella stazione (0.1 approssimazione della distanza)
         {
             if (vect[i].wait == 0)
             {
