@@ -20,7 +20,7 @@ void Station::manage(vector<Train> &vect, const int time)
                                                              // NON CREDO SERVA CONTROLLARE GLI ALTRI
             }
         }
-        else if (vect[i].current_pos >= distance - 5 && vect[i].current_speed > 80.00/60.00 && !vect[i].is_parked) //quando arriva a 5km(e non è già nel parcheggio)
+        else if (vect[i].current_pos >= distance - 5 && vect[i].current_speed > 80.00 / 60.00 && !vect[i].is_parked) //quando arriva a 5km(e non è già nel parcheggio)
         {
             if (free_binaries > 0) //se ci sono binari liberi ne occupa uno e parte verso la stazione
             {
@@ -58,11 +58,17 @@ void Station::manage(vector<Train> &vect, const int time)
                     cout << ", in anticipo di " << vect[i].eta[station_number] - time << " minuti";
                 cout << endl;
             }
-            if (vect[i].current_pos == distance && vect[i].wait == 5) //se sono passati 5 minuti può partire
+            if ( vect[i].wait == 5) //se sono passati 5 minuti può partire   vect[i].current_pos == distance &&
             {
                 vect[i].wait = 0;
                 vect[i].setSpeedLimit();
                 free_binaries++;
+                cout<<"TRENO PARTITO DA "<<name<<" alle "<<time<<endl;
+                if (station_number == 6)
+                {
+                    vect[i].has_arrived = true;
+                    vect[i].setSpeed(0);
+                }
             }
             else if (vect[i].wait < 5) //se sono passati meno di 5 minuti, continua ad aspettare
             {

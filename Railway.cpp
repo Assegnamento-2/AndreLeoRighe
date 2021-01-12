@@ -276,10 +276,11 @@ void Railway::run()
     {
         //sort(train_vect.begin(), train_vect.end(), compareTrainsPos); //ordina i treni per posizione(decrescente) ed eventualmente tempo di attesa FUNZIONA??
         //for (auto train : train_vect)
-        for (int train = 0; train < train_vect.size(); train++){ //setta il moved di tutti i treni a falso. si può fare nel for successivo?
+        for (int train = 0; train < train_vect.size(); train++)
+        { //setta il moved di tutti i treni a falso. si può fare nel for successivo?
             train_vect[train].moved = false;
-            if(train_vect[train].has_arrived)
-                arrived_trains++;
+            // if (train_vect[train].has_arrived)
+            //     arrived_trains++;
         }
         // for (int num_staz = 1; num_staz < station_vect.size(); num_staz++)
         bool is_not_first_station = false;
@@ -291,13 +292,9 @@ void Railway::run()
                 vector<Train> train_manage;
                 for (auto train : train_vect)
                 {
-                    if (train.current_pos <= station_vect[station].distance + 5 && !train.moved)
+                    if (train.current_pos <= station_vect[station].distance + 5 && !train.moved && !train.has_arrived)
                     {
                         train_manage.push_back(train);
-                    }
-                    if (train.current_pos >= station_vect.back().distance) //se un treno è arrivato all'ultima stazione, aumenta il contatore dei treni arrivati
-                    {
-                        arrived_trains++;
                     }
                 }
                 if (!train_manage.empty()) //se il vettore di treni che la stazione deve gestire non è vuoto
@@ -308,6 +305,10 @@ void Railway::run()
                             if (train_vect[train].name == updated.name)
                             {
                                 train_vect[train] = updated;
+                                if (updated.has_arrived) //se un treno è arrivato all'ultima stazione, aumenta il contatore dei treni arrivati
+                                {
+                                    arrived_trains++;
+                                }
                             }
                 }
             }
@@ -334,12 +335,10 @@ void Railway::run()
                 is_not_first_station = true;
             }
         }
-        // if (arrived_trains == train_vect.size()-1)//se tutti i treni sono arrivati ferma il ciclo
-        if (time >= 800)
-            {
-                //cout<<arrived_trains<<endl;
-                stop = true;
-            }
+        if (arrived_trains == train_vect.size())//se tutti i treni sono arrivati ferma il ciclo
+        {
+            stop = true;
+        }
     }
 }
 

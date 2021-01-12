@@ -23,6 +23,7 @@ Train &Train::operator=(const Train &original) //assegnamento di copia
 	wait = original.wait;
 	delay = original.delay;
 	start_time=original.start_time;
+	has_arrived=original.has_arrived;
 	return *this;
 }
 void Train::setSpeed(double speed) //setta la velocità richiesta, se superiore al limite setta come velocità la velocità massima
