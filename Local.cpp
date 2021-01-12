@@ -1,3 +1,4 @@
+//Andrea Calciolari
 #ifndef LOCALC
 #define LOCALC
 
