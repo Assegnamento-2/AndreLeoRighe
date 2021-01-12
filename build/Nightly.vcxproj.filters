@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\andre\Documents\GitHub\AndreLeoRighe\build\CMakeFiles\187e30dc3d1bccf7eb911d26d4d67138\Nightly.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\andre\Documents\GitHub\AndreLeoRighe\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\andre\Documents\GitHub\AndreLeoRighe\build\CMakeFiles\Nightly" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D3F655EC-0A4B-3D03-A538-E64E211FE46D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

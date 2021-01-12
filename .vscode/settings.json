@@ -6,6 +6,13 @@
         "ios": "cpp",
         "string": "cpp",
         "type_traits": "cpp",
+<<<<<<< Updated upstream
         "iostream": "cpp"
     }
+=======
+        "iostream": "cpp",
+        "ostream": "cpp"
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+>>>>>>> Stashed changes
 }

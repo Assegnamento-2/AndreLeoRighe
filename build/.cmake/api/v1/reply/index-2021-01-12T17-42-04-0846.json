@@ -1,0 +1,89 @@
+{
+	"cmake" : 
+	{
+		"generator" : 
+		{
+			"multiConfig" : true,
+			"name" : "Visual Studio 16 2019",
+			"platform" : "win32"
+		},
+		"paths" : 
+		{
+			"cmake" : "C:/Users/andre/Desktop/c++/cmake-3.19.2-win64-x64/bin/cmake.exe",
+			"cpack" : "C:/Users/andre/Desktop/c++/cmake-3.19.2-win64-x64/bin/cpack.exe",
+			"ctest" : "C:/Users/andre/Desktop/c++/cmake-3.19.2-win64-x64/bin/ctest.exe",
+			"root" : "C:/Users/andre/Desktop/c++/cmake-3.19.2-win64-x64/share/cmake-3.19"
+		},
+		"version" : 
+		{
+			"isDirty" : false,
+			"major" : 3,
+			"minor" : 19,
+			"patch" : 2,
+			"string" : "3.19.2",
+			"suffix" : ""
+		}
+	},
+	"objects" : 
+	[
+		{
+			"jsonFile" : "codemodel-v2-12b9f7becc9e2681564b.json",
+			"kind" : "codemodel",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 2
+			}
+		},
+		{
+			"jsonFile" : "cache-v2-a9b8fc59a7b8e10a93a9.json",
+			"kind" : "cache",
+			"version" : 
+			{
+				"major" : 2,
+				"minor" : 0
+			}
+		}
+	],
+	"reply" : 
+	{
+		"client-vscode" : 
+		{
+			"query.json" : 
+			{
+				"requests" : 
+				[
+					{
+						"kind" : "cache",
+						"version" : 2
+					},
+					{
+						"kind" : "codemodel",
+						"version" : 2
+					}
+				],
+				"responses" : 
+				[
+					{
+						"jsonFile" : "cache-v2-a9b8fc59a7b8e10a93a9.json",
+						"kind" : "cache",
+						"version" : 
+						{
+							"major" : 2,
+							"minor" : 0
+						}
+					},
+					{
+						"jsonFile" : "codemodel-v2-12b9f7becc9e2681564b.json",
+						"kind" : "codemodel",
+						"version" : 
+						{
+							"major" : 2,
+							"minor" : 2
+						}
+					}
+				]
+			}
+		}
+	}
+}
