@@ -5,3 +5,4 @@ Il transito di treni Veloci e Superveloci per stazioni locali non è gestito cor
 I nomi delle stazioni non possono contenere spazi.
 L'anticipo dei treni si conserva di stazione in strazione e non viene esaurito prima di ripartire.
 I treni che partono dall'ultima stazione non si comportano correttamente.
+Per un errore dell'ultimo munito non localizzato i treni non partono più
