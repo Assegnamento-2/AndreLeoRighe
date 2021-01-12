@@ -1,4 +1,6 @@
-# AndreLeoRighe <3
+L'intero è realizzato con VS Code. 
+L'utilizzo di CMake ha causato problemi che non sono stati risolti.
+
 
 
 messaggi durante la gestione di dati non validi dei check/scrivere che per scelta settiamo i trani a superveloci etc
