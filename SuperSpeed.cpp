@@ -1,3 +1,5 @@
+Jacopo Righetto
+
 #ifndef SUPER
 #define SUPER
 #include "Train.cpp"
