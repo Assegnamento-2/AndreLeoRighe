@@ -1,3 +1,5 @@
+Jacopo Righetto
+
 #ifndef TRAINH
 #define TRAINH
 #include "RootTrain.h"
