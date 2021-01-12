@@ -1,3 +1,5 @@
+Jacopo Righetto
+
 #ifndef TRAINC
 #define TRAINC
 #include "Train.h"
