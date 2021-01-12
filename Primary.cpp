@@ -9,6 +9,7 @@ public:
     Primary(vector<string> vect)
         : Station(vect)
     {
+        
     }
 };
 
