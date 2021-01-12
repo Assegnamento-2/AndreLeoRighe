@@ -1,4 +1,4 @@
-Jacopo Righetto
+//Jacopo Righetto
 
 #ifndef SUPER
 #define SUPER
